@@ -1,30 +1,70 @@
 import React from "react";
-import { Row, Select , Form, Input, Button } from "antd";
-import 'antd/dist/antd.css'; 
+import { Row, Select, Form, Input, Button, notification } from "antd";
+import 'antd/dist/antd.css';
+import TextArea from "rc-textarea";
+import { createClient } from "../url_helper";
+
 const { Option } = Select;
 const formItemLayout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 16 },
 };
 const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
     },
-  };
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
+};
 class AddClient extends React.Component {
-    
-    handleSubmit=(values)=>{
-console.log(values.username)
+
+  handleSubmit = (values) => {
+    console.log(values);
+    try {
+      createClient(values).then((res) => {
+        if (res.data.status === 200) {
+          console.log(res);
+          notification.success({
+            message: res.data.message,
+            description: 'This feature has been updated later!',
+          })
+          // window.location.href = "/dashboard"
+          this.props.history.push("/dashboard");
+
+        } else {
+          notification.warn({
+            message: res.data.message,
+            description: 'This feature has been updated later!',
+          })
+        }
+      })
+    } catch (error) {
+      console.error(error)
+      notification.error({
+        message: error.message,
+        description: 'This feature has been updated later!',
+      })
     }
+  }
 
   render() {
+    const categoryTypes = [
+      "Steel & cement",
+      "Electrical",
+      "Sanitory|Tile|Plumbing",
+      "paints",
+      "Water proofing",
+      "Playwoods|Glasses",
+      "Kitchen Items",
+      "Water treatment",
+      "Mosqito slveeas",
+      "Hardware Tools"
+    ]
     return (
       <>
         <div class="wrapper h-100">
@@ -103,35 +143,11 @@ console.log(values.username)
           <Form onFinish={this.handleSubmit}>
             <div class="container-fluid mt-3">
               <h3>Add Client</h3>
-
-              {/* <div class="row mt-3 mb-4">
-              <div class="col-3"> */}
-
               <div class="row">
                 <div class="col-sm">
                   <div className="form-group">
                     <Form.Item
-                     {...formItemLayout}
-                      name="username"
-                      label="Name"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your username!",
-                        },
-                      ]}
-                     
-                    >
-                      <Input
-                        className="form-control"
-                        type="text"
-                        placeholder="Username"
-                      />
-                    </Form.Item>
-                  </div>
-                  <div className="form-group">
-                    <Form.Item
-                       {...formItemLayout}
+                      {...formItemLayout}
                       name="email"
                       label="Email Address"
                       rules={[
@@ -150,28 +166,66 @@ console.log(values.username)
                   </div>
                   <div className="form-group">
                     <Form.Item
-                     {...formItemLayout}
-                      name="client"
-                      label="Type of Client"
+                      {...formItemLayout}
+                      name="customername"
+                      label="customer Name"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your username!",
+                        },
+                      ]}
+
+                    >
+                      <Input
+                        className="form-control"
+                        type="text"
+                        placeholder="Username"
+                      />
+                    </Form.Item>
+                  </div>
+                  <div className="form-group">
+                    <Form.Item
+                      {...formItemLayout}
+                      name="type"
+                      label="customer Type "
                       rules={[
                         {
                           required: true,
                           message: "Please input type of client!",
                         },
                       ]}
-                     
+
                     >
-                      <Input
-                        className="form-control"
-                        type="text"
-                        placeholder="type of client"
-                      />
+                      <Select placeholder="select your type of customer">
+                        <Option value="Builder">Builder</Option>
+                        <Option value="Individual">Individual</Option>
+                        <Option value="Worker">Worker</Option>
+                        <Option value="Shopkeeper">Shopkeeper</Option>
+
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <div className="form-group">
+
+                    <Form.Item
+                      {...formItemLayout}
+                      name="category"
+                      label="Category"
+                      rules={[{ required: true, message: 'Please select Category!' }]}
+                    >
+                      <Select placeholder="select your Category">
+                        {/* <Option value="1">1</Option> */}
+                        {categoryTypes.map((item) => {
+                          return <Option key={item} value={item}>{item}</Option>
+                        })}
+                      </Select>
                     </Form.Item>
                   </div>
                   <div className="form-group">
                     <Form.Item
-                     {...formItemLayout}
-                      name="productname"
+                      {...formItemLayout}
+                      name="product"
                       label="Product Name"
                       rules={[
                         {
@@ -179,7 +233,7 @@ console.log(values.username)
                           message: "Please input product name!",
                         },
                       ]}
-                     
+
                     >
                       <Input
                         className="form-control"
@@ -188,12 +242,32 @@ console.log(values.username)
                       />
                     </Form.Item>
                   </div>
+                  <div className="form-group">
+                    <Form.Item
+                      {...formItemLayout}
+                      name="others"
+                      label="Others"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your brand!",
+                        },
+                      ]}
+
+                    >
+                      <Input
+                        className="form-control"
+                        type="text"
+                        placeholder="Others"
+                      />
+                    </Form.Item>
+                  </div>
                 </div>
                 <div class="col-sm">
-                <div className="form-group">
+                  <div className="form-group">
                     <Form.Item
-                     {...formItemLayout}
-                      name="mobile"
+                      {...formItemLayout}
+                      name="phone"
                       label="Mobile Number"
                       rules={[
                         {
@@ -208,10 +282,31 @@ console.log(values.username)
                         placeholder="mobile number"
                       />
                     </Form.Item>
-                    </div>
-                    <div className="form-group">
+                  </div>
+
+                  <div className="form-group">
                     <Form.Item
-                     {...formItemLayout}
+                      {...formItemLayout}
+                      name="lead"
+                      label="Source of Lead"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your source of Lead!",
+                        },
+                      ]}
+
+                    >
+                      <Select placeholder="select your lead source">
+                        <Option value="Just dial">Just dial</Option>
+                        <Option value="Social media">Social media</Option>
+                        <Option value="Reference">Reference</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <div className="form-group">
+                    <Form.Item
+                      {...formItemLayout}
                       name="address"
                       label="Address"
                       rules={[
@@ -227,95 +322,53 @@ console.log(values.username)
                         placeholder="address"
                       />
                     </Form.Item>
-                  </div>
-                  <div className="form-group">
-                    <Form.Item
-                     {...formItemLayout}
-                      name="visit"
-                      label="Stage of visit"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your stage of visit!",
-                        },
-                      ]}
-                     
-                    >
-                      <Input
-                        className="form-control"
-                        type="text"
-                        placeholder="stage of visit"
-                      />
-                    </Form.Item>
-                  </div>
-                  <div className="form-group">
-                    <Form.Item
-                     {...formItemLayout}
-                      name="brand"
-                      label="Brand"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your brand!",
-                        },
-                      ]}
-                     
-                    >
-                      <Input
-                        className="form-control"
-                        type="text"
-                        placeholder="brand"
-                      />
-                    </Form.Item>
-                  </div>
-                </div>
-                <div class="col-sm">
-                <div className="form-group">
-                    <Form.Item
-                     {...formItemLayout}
-                      name="quantity"
-                      label="Quantity"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your quantity!",
-                        },
-                      ]}
-                    >
-                      <Input
-                        className="form-control"
-                        type="number"
-                        placeholder="Quantity"
-                      />
-                    </Form.Item>
+                    <div className="form-group">
+                      <Form.Item
+                        {...formItemLayout}
+                        name="quantity"
+                        label="Quantity"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input your quantity!",
+                          },
+                        ]}
+                      >
+                        <Input
+                          className="form-control"
+                          type="number"
+                          placeholder="Quantity"
+                        />
+                      </Form.Item>
                     </div>
                     <div className="form-group">
-                         
-                    <Form.Item
-                      {...formItemLayout}
-        name="lead"
-        label="Lead Source"
-        rules={[{ required: true, message: 'Please select lead!' }]}
-      >
-        <Select placeholder="select your lead source">
-          <Option value="1">1</Option>
-          <Option value="2">2</Option>
-          <Option value="3">3</Option>
-          <Option value="4">4</Option>
-          <Option value="5">5</Option>
-        </Select>
-      </Form.Item>
-
-      </div>
+                      <Form.Item
+                        {...formItemLayout}
+                        name="comment"
+                        label="Comment"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input your comment!",
+                          },
+                        ]}
+                      >
+                        <TextArea
+                          className="form-control"
+                          placeholder="Comments"
+                          autoSize={{ minRows: 4, }}
+                        />
+                      </Form.Item>
+                    </div>
+                  </div>
                 </div>
               </div>
-             
+              <div className="float-end ">
+                <button className="btn btn-primary m-3" htmlType="submit">
+                  SUBMIT
+                </button>
+              </div>
             </div>
-            <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          SUBMIT
-        </Button>
-      </Form.Item>
           </Form>
         </div>
       </>

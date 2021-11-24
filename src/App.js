@@ -17,6 +17,7 @@ function App() {
         </Route> */}
     <Route exact path="/" component={LandingScreen} />
     <Route  path="/login" component={Login} />
+    <Route  path="/signup" component={SignUp} />
     <Route  path="/dashboard" component={Dashboard} />
     <Route path="/create-client" component={AddClient}/>
     <Route path={"/edit-client/:id"} component={EditClient}/>
