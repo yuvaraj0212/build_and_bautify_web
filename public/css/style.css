@@ -1,0 +1,32 @@
+.wrapper{
+    position: absolute;
+    width:100%!important;
+}
+.login{
+    align-items: center;
+    position: relative !important;
+    height: 100%!important;
+    width: 100% !important;
+}
+
+
+.logo-sec{
+    width:60%!important;
+    background-color: white!important;
+}
+
+.btn-primary {
+    width:283px;
+    color: #fff !important;
+    background-color: #344e89!important;
+    border-radius: 5px!important;
+    /* border-color: #007bff; */
+}
+
+.nav a{
+    color:whitesmoke !important;
+}
+.dropdown-menu{
+    right: 121px !important;
+    color: red !important;
+}
