@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 import TextArea from "rc-textarea";
 import  Axios  from "axios";
 import { updateClient } from "../url_helper";
-
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
 const { Option } = Select;
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -183,6 +183,15 @@ const EditClient = () => {
             </a>
           </nav>
         </div>
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">
+              Login
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/dashboard">
+              Home
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Edit client</Breadcrumb.Item>
+          </Breadcrumb>
         <Form onFinish={handleSubmit} form={forms}>
           <div class="container-fluid mt-3">
             <h3>Edit Client</h3>

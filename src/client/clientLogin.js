@@ -1,12 +1,12 @@
 import React from "react";
-import "./style.css";
+import "../main-screen/style.css";
 import { Link, useHistory } from "react-router-dom";
 // import { useHistory  } from 'react-router'
 import { notification, Form, Input } from 'antd';
 import { signin } from "../url_helper";
 
 
-class Login extends React.Component {
+class clientLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +31,7 @@ class Login extends React.Component {
             description: 'This feature has been updated later!',
           })
           // window.location.href = "/dashboard"
-          this.props.history.push("/dashboard");
+          this.props.history.push("/client-dashboard");
 
         } else {
           notification.warn({
@@ -108,7 +108,7 @@ class Login extends React.Component {
                      
                       <div class="sign-link mt-4 mb-4">
                         <h6>Forgot Password</h6>
-                        <Link to='/signup'>
+                        <Link to='/client-signup'>
                           <a
                             className='text-decoration-none'
                             // href="Signup.html"
@@ -136,4 +136,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default clientLogin;

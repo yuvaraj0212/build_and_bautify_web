@@ -20,13 +20,17 @@ class LandingScreen extends React.Component {
                 <div class=" w-100 text-center">
                   <div class="card m-auto p-3 pt-5 card-tag">
                     <div class="card-body">
-                      <Link to="/login"><a class="btn btn-primary">
-                        Login as Admin
-                      </a></Link>
+                      <Link to="/login">
+                        <a class="btn btn-primary">
+                          Login as Admin
+                        </a>
+                      </Link>
                       <br />
+                      <Link to="/client-login">
                       <a class="btn btn-primary mt-5">
                         Login as Client
                       </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

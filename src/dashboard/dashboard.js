@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './style.css';
+import '../main-screen/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { notification, Divider, Modal, Button, Space } from 'antd';
@@ -8,8 +8,8 @@ import {
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { deleteClient, getClient } from "../url_helper";
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
 const { confirm } = Modal;
-
 const Dashboard = () => {
   const history = new useHistory();
   const [search, setSearch] = useState('');
@@ -118,12 +118,17 @@ const Dashboard = () => {
 
           </nav>
         </div>
-
+        <Breadcrumb>
+            <Breadcrumb.Item href="/">
+              Login
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Home</Breadcrumb.Item>
+          </Breadcrumb>
         <div class="container-fluid mt-3">
           <Link to="create-client"><a class="btn btn-primary float-right mb-2" >add</a></Link>
           <h5>Search</h5>
           <input class="form-control" id="myInput" type="text" placeholder="Search.." onChange={(e) => setSearch(e.target.value)}></input>
-          <br />
+          <br />  
           <div class="table-responsive">
           <table class="table table-bordered">
             <thead>

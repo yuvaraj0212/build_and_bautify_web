@@ -3,7 +3,7 @@ import { Row, Select, Form, Input, Button, notification } from "antd";
 import 'antd/dist/antd.css';
 import TextArea from "rc-textarea";
 import { createClient } from "../url_helper";
-
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
 const { Option } = Select;
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -140,6 +140,15 @@ class AddClient extends React.Component {
               </a>
             </nav>
           </div>
+          <Breadcrumb>
+          <Breadcrumb.Item href="/">
+              Login
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/dashboard">
+              Home
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Add client</Breadcrumb.Item>
+          </Breadcrumb>
           <Form onFinish={this.handleSubmit}>
             <div class="container-fluid mt-3">
               <h3>Add Client</h3>

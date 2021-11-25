@@ -1,12 +1,15 @@
 import Axios from 'axios';
 
-const baseUrl = 'http://13.127.52.182/Build-and-beautify';
+// const baseUrl = 'http://13.127.52.182/Build-and-beautify';
+const baseUrl = 'http://localhost:8080';
 
-export const signin = (data) => Axios({  method: 'post',url: `${baseUrl}/signin`, data});
+export const signin = (data) => Axios({  method: 'post',url: `${baseUrl}/signin`, data:data});
 
-export const signup = (data) => Axios({  method: 'post',url: `${baseUrl}/signup`, data});
+export const signup = (data) => Axios({  method: 'post',url: `${baseUrl}/signup`,data: data});
 
-export const createClient = (data) => Axios({  method: 'post',url: `${baseUrl}/create-client`, data});
+export const createClient = (data) => Axios({  method: 'post',url: `${baseUrl}/create-client`,data: data});
+
+export const createClientEnquiry = (data) => Axios({  method: 'post',url: `${baseUrl}/create-client-enquiry`,data: data});
 
 export const updateClient = (data) => Axios({  method: 'post',url: `${baseUrl}/update-client`, data});
 

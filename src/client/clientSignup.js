@@ -1,11 +1,11 @@
 import React from "react";
-import "./style.css";
+import "../main-screen/style.css";
 import { notification, Form, Input } from 'antd';
 import { signup } from "../url_helper";
 
-class SignUp extends React.Component {
+class clientSignUp extends React.Component {
   handlesignup = (values) => {
-    values.rolename="admin";
+    values.rolename="client";
     console.log(values);
     try {
       signup(values).then((res) => {
@@ -16,7 +16,7 @@ class SignUp extends React.Component {
             description: 'This feature has been updated later!',
           })
           // window.location.href = "/dashboard"
-          this.props.history.push("/login");
+          this.props.history.push("/client-login");
 
         } else {
           notification.warn({
@@ -260,4 +260,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default clientSignUp;
