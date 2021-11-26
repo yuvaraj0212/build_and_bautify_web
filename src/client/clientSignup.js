@@ -4,11 +4,7 @@ import { notification, Form, Input } from 'antd';
 import { signup } from "../url_helper";
 
 class clientSignUp extends React.Component {
-  constructor(){
-    super();
-    this.state = {value: ''};
-    this.onChange = this.onChange.bind(this)
- }
+  
 
   handlesignup = (values) => {
     values.rolename="client";
