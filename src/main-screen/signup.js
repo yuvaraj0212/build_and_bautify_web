@@ -160,10 +160,11 @@ class SignUp extends React.Component {
                                     message:
                                       'Please input your mobile number!',
                                   },
+                                 
                                 ]}>
                                 <Input
                                   className="form-control"
-                                  type="tel"
+                                  type="number"
                                   placeholder="mobile number"
                                 />
                               </Form.Item>
@@ -177,10 +178,11 @@ class SignUp extends React.Component {
                                     message:
                                       'Please input your adhar number!',
                                   },
+                                  
                                 ]}>
                                 <Input
                                   className="form-control"
-                                  type="text"
+                                  type="number"
                                   placeholder="adhar number"
                                 />
                               </Form.Item>
@@ -214,7 +216,10 @@ class SignUp extends React.Component {
                                     required: true,
                                     message:
                                       'Please input your password',
-                                  },
+                                  },{
+                                    pattern:/^.{6,}$/,
+                                    message: `password contains at least Six characters`
+                                  }
                                 ]}>
                                 <Input
                                   className="form-control"
@@ -233,7 +238,10 @@ class SignUp extends React.Component {
                                     required: true,
                                     message:
                                       'Please input your confirmpassword',
-                                  },
+                                  },{
+                                    pattern:/^.{6,}$/,
+                                    message: `password contains at least Six characters`
+                                  }
                                 ]}>
                                 <Input
                                   className="form-control"

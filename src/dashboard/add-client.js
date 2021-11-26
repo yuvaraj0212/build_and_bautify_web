@@ -1,9 +1,11 @@
 import React from "react";
 import { Row, Select, Form, Input, Button, notification } from "antd";
 import 'antd/dist/antd.css';
+import '../main-screen/style.css';
 import TextArea from "rc-textarea";
 import { createClient } from "../url_helper";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import { Link } from "react-router-dom";
 const { Option } = Select;
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -22,7 +24,13 @@ const tailFormItemLayout = {
   },
 };
 class AddClient extends React.Component {
-
+ constructor(){
+   super();
+   this.state = {
+     number : ''
+   }
+   this.handleKeyDown =this.handleKeyDown.bind(this)
+ }
   handleSubmit = (values) => {
     console.log(values);
     try {
@@ -51,6 +59,16 @@ class AddClient extends React.Component {
       })
     }
   }
+
+  handleKeyDown(e) {
+    const re = /^[0-9\b]+$/;
+    console.log('e',e.target.value)
+    if(!(e.target.value) === 'e' || re.test(e.target.value))
+    {
+      console.log('sdae',e.target.value)
+      this.setState({ number : e.target.value})
+    }
+ }
 
   render() {
     const categoryTypes = [
@@ -141,11 +159,15 @@ class AddClient extends React.Component {
             </nav>
           </div>
           <Breadcrumb>
-          <Breadcrumb.Item href="/">
-              Login
+            <Breadcrumb.Item >
+              <Link to="/">
+                Login
+              </Link>
             </Breadcrumb.Item>
-            <Breadcrumb.Item href="/dashboard">
-              Home
+            <Breadcrumb.Item>
+              <Link to="/dashboard">
+                Home
+              </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item active>Add client</Breadcrumb.Item>
           </Breadcrumb>
@@ -289,6 +311,8 @@ class AddClient extends React.Component {
                         className="form-control"
                         type="number"
                         placeholder="mobile number"
+                        // value={this.state.number}
+                        // onKeyPress={this.handleKeyDown}
                       />
                     </Form.Item>
                   </div>

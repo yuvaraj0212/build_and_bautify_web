@@ -119,65 +119,67 @@ const Dashboard = () => {
           </nav>
         </div>
         <Breadcrumb>
-            <Breadcrumb.Item href="/">
+          <Breadcrumb.Item >
+            <Link to="/">
               Login
-            </Breadcrumb.Item>
-            <Breadcrumb.Item active>Home</Breadcrumb.Item>
-          </Breadcrumb>
+            </Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>Home</Breadcrumb.Item>
+        </Breadcrumb>
         <div class="container-fluid mt-3">
           <Link to="create-client"><a class="btn btn-primary float-right mb-2" >add</a></Link>
           <h5>Search</h5>
           <input class="form-control" id="myInput" type="text" placeholder="Search.." onChange={(e) => setSearch(e.target.value)}></input>
-          <br />  
+          <br />
           <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Cust ID</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                {/* <th>Email</th> */}
-                {/* <th>Type</th>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Cust ID</th>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  {/* <th>Email</th> */}
+                  {/* <th>Type</th>
          <th>Product</th> */}
-                <th>Location</th>
-                <th>Category</th>
-                <th>Qty</th>
-                <th>Edit/ Delete</th>
-              </tr>
-            </thead>
-            <tbody id="myTable">
-              {data.length !== 0 ?
-                data.filter((item) => {
-                  if (search === '') {
-                    return item;
-                  } else if (item.customername.toLowerCase().includes(search.toLowerCase())) {
-                    return item;
-                  }
-                }).map((val) => (
-                  <tr key={val.id}>
-                    <td>{val.id}</td>
-                    <td>{val.customername}</td>
-                    <td>{val.phone}</td>
-                    <td>{val.address}</td>
-                    <td>{val.category}</td>
-                    <td>{val.quantity}</td>
+                  <th>Location</th>
+                  <th>Category</th>
+                  <th>Qty</th>
+                  <th>Edit/ Delete</th>
+                </tr>
+              </thead>
+              <tbody id="myTable">
+                {data.length !== 0 ?
+                  data.filter((item) => {
+                    if (search === '') {
+                      return item;
+                    } else if (item.customername.toLowerCase().includes(search.toLowerCase())) {
+                      return item;
+                    }
+                  }).map((val) => (
+                    <tr key={val.id}>
+                      <td>{val.id}</td>
+                      <td>{val.customername}</td>
+                      <td>{val.phone}</td>
+                      <td>{val.address}</td>
+                      <td>{val.category}</td>
+                      <td>{val.quantity}</td>
 
-                    {/* <td>{val.email}</td>
+                      {/* <td>{val.email}</td>
                 <td>{val.type}</td>
                 <td>{val.product}</td> */}
 
 
-                    <td>
-                      <Button onClick={(e) => handleEdit(e, val)}> Edit</Button>
+                      <td>
+                        <Button onClick={(e) => handleEdit(e, val)}> Edit</Button>
 
-                      <Divider type="vertical" />
-                      <Button onClick={(e) => showConfirm(e, val.id)}> Delete</Button>
-                    </td>
-                  </tr>
-                )) : <tr><p className="text-center m-100 color-blue">No data found</p></tr>
-              }
-              <tr>
-                {/* <td>09343</td>
+                        <Divider type="vertical" />
+                        <Button onClick={(e) => showConfirm(e, val.id)}> Delete</Button>
+                      </td>
+                    </tr>
+                  )) : <tr><p className="text-center m-100 color-blue">No data found</p></tr>
+                }
+                <tr>
+                  {/* <td>09343</td>
          <td>Doe</td>
          <td>982738297</td>
          <td>Joe@gmail.com</td>
@@ -188,9 +190,9 @@ const Dashboard = () => {
          <td>34, Gandhi nagar, Anna nagar, Chennai</td>
          <td>Completed</td>
          <td>Edit / Delete</td> */}
-              </tr>
-            </tbody>
-          </table>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

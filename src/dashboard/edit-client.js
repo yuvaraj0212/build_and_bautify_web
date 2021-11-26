@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Row, Select, Form, Input, Button, notification } from "antd";
 import 'antd/dist/antd.css';
 import TextArea from "rc-textarea";
-import  Axios  from "axios";
+import Axios from "axios";
 import { updateClient } from "../url_helper";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 const { Option } = Select;
@@ -53,7 +53,7 @@ const EditClient = () => {
   }
 
   const handleSubmit = (values) => {
-    values.id=data.id;
+    values.id = data.id;
     console.log(values);
     try {
       updateClient(values).then((res) => {
@@ -96,17 +96,17 @@ const EditClient = () => {
   ]
   const [forms] = Form.useForm();
   forms.setFieldsValue({
-    email:data.email,
-    customername:data.customername,
-    type:data.type,
-    category:data.category,
-    product:data.product,
-    others:data.others,
-    phone:data.phone,
-    lead:data.lead,
-    address:data.address,
-    quantity:data.quantity,
-    comment:data.comment
+    email: data.email,
+    customername: data.customername,
+    type: data.type,
+    category: data.category,
+    product: data.product,
+    others: data.others,
+    phone: data.phone,
+    lead: data.lead,
+    address: data.address,
+    quantity: data.quantity,
+    comment: data.comment
   })
   return (
     <>
@@ -184,14 +184,18 @@ const EditClient = () => {
           </nav>
         </div>
         <Breadcrumb>
-          <Breadcrumb.Item href="/">
+          <Breadcrumb.Item >
+            <Link to="/">
               Login
-            </Breadcrumb.Item>
-            <Breadcrumb.Item href="/dashboard">
+            </Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link to="/dashboard">
               Home
-            </Breadcrumb.Item>
-            <Breadcrumb.Item active>Edit client</Breadcrumb.Item>
-          </Breadcrumb>
+            </Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>Edit client</Breadcrumb.Item>
+        </Breadcrumb>
         <Form onFinish={handleSubmit} form={forms}>
           <div class="container-fluid mt-3">
             <h3>Edit Client</h3>
@@ -417,10 +421,10 @@ const EditClient = () => {
               </div>
             </div>
             <div className="float-end ">
-                <button className="btn btn-primary m-3" htmlType="submit">
-                  SUBMIT
-                </button>
-              </div>
+              <button className="btn btn-primary m-3" htmlType="submit">
+                SUBMIT
+              </button>
+            </div>
           </div>
         </Form>
       </div>

@@ -16,6 +16,9 @@ const { Option } = Select;
 const ClientDashboard = () => {
   const history = useHistory();
   const handlesignup = (value) => {
+    const id = sessionStorage.getItem("clientId");
+    console.log(id);
+    value.clientId = id;
     console.log(value);
     try {
       createClientEnquiry(value).then((res) => {
@@ -25,7 +28,8 @@ const ClientDashboard = () => {
             message: res.data.message,
             description: 'This feature has been updated later!',
           })
-          history.push("/client-dashboard");
+          document.getElementById('enquiryForm').reset()
+          // history.push("/client-dashboard");
 
         } else {
           notification.warn({
@@ -67,7 +71,7 @@ const ClientDashboard = () => {
                   {/* style="border:none; width:70%!Important " */}
                   <div class="container-fluid mt-3">
                     <h3>Client Page</h3>
-                    <Form onFinish={handlesignup}>
+                    <Form onFinish={handlesignup} id='enquiryForm'>
                       <div className="form-group mt-4">
                         <label>New Enquiry</label>
                         <Form.Item
@@ -141,7 +145,7 @@ const ClientDashboard = () => {
                         </Form.Item>
                       </div>
                       <div className="form-group">
-                      <button type='submit' class="btn-primary p-2 form-control" >Submit</button>
+                        <button type='submit' class="btn-primary p-2 form-control" >Submit</button>
                       </div>
                     </Form>
                     {/* style="margin-top:30px !important" */}

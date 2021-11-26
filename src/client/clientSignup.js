@@ -4,6 +4,12 @@ import { notification, Form, Input } from 'antd';
 import { signup } from "../url_helper";
 
 class clientSignUp extends React.Component {
+  constructor(){
+    super();
+    this.state = {value: ''};
+    this.onChange = this.onChange.bind(this)
+ }
+
   handlesignup = (values) => {
     values.rolename="client";
     console.log(values);
@@ -32,10 +38,11 @@ class clientSignUp extends React.Component {
         description: 'This feature has been updated later!',
       })
     }
-  }
-
+  
+ }
 
   render() {
+   
     return (
       <>
         <div class="wrapper h-100">
@@ -160,10 +167,14 @@ class clientSignUp extends React.Component {
                                     message:
                                       'Please input your mobile number!',
                                   },
+                                  {
+                                    pattern:/^[0-9\b]+$/,
+                                    message: ` contains only numbers`
+                                  }
                                 ]}>
                                 <Input
                                   className="form-control"
-                                  type="tel"
+                                  type="number" 
                                   placeholder="mobile number"
                                 />
                               </Form.Item>
@@ -176,11 +187,14 @@ class clientSignUp extends React.Component {
                                     required: true,
                                     message:
                                       'Please input your adhar number!',
-                                  },
+                                  },{
+                                    pattern:/^[0-9\b]+$/,
+                                    message: ` contains only numbers`
+                                  }
                                 ]}>
                                 <Input
                                   className="form-control"
-                                  type="text"
+                                  type="number" 
                                   placeholder="adhar number"
                                 />
                               </Form.Item>
@@ -214,7 +228,10 @@ class clientSignUp extends React.Component {
                                     required: true,
                                     message:
                                       'Please input your password',
-                                  },
+                                  },{
+                                    pattern:/^.{6,}$/,
+                                    message: `password contains at least Six characters`
+                                  }
                                 ]}>
                                 <Input
                                   className="form-control"
@@ -233,7 +250,10 @@ class clientSignUp extends React.Component {
                                     required: true,
                                     message:
                                       'Please input your confirmpassword',
-                                  },
+                                  },{
+                                    pattern:/^.{6,}$/,
+                                    message: `password contains at least Six characters`
+                                  }
                                 ]}>
                                 <Input
                                   className="form-control"

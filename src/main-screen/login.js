@@ -20,19 +20,27 @@ class Login extends React.Component {
     // event.preventDefault();
     // const { username, password } = this.state;
     // const routerHistory = useHistory();
-    const data = { email: values.username, password: values.password };
-    console.log(data);
+    console.log(values);
     try {
-      signin(data).then((res) => {
+      signin(values).then((res) => {
         if (res.data.status === 200) {
-          console.log(res);
-          notification.success({
-            message: res.data.message,
-            description: 'This feature has been updated later!',
-          })
-          // window.location.href = "/dashboard"
-          this.props.history.push("/dashboard");
-
+          console.log(res.data.result.rolename)
+          if (res.data.result.rolename==='admin') {
+            console.log(res);
+            notification.success({
+              message: res.data.message,
+              description: 'This feature has been updated later!',
+            })
+            // window.location.href = "/dashboard"
+            this.props.history.push("/dashboard");
+  
+          } else {
+            notification.warn({
+              message: "Email Notavilable in Admain Role",
+              description: 'This feature has been updated later!',
+            })
+          }
+         
         } else {
           notification.warn({
             message: res.data.message,
@@ -72,7 +80,7 @@ class Login extends React.Component {
                       <div className="form-group mt-4">
                         <label>Email address</label>
                         <Form.Item
-                          name="username"
+                          name="email"
                           rules={[
                             {
                               required: true,
@@ -96,7 +104,10 @@ class Login extends React.Component {
                               required: true,
                               message:
                                 'Please input your password!',
-                            },
+                            },{
+                              pattern:/^.{6,}$/,
+                              message: `password contains at least Six characters`
+                            }
                           ]}>
                           <Input
                             className="form-control"
