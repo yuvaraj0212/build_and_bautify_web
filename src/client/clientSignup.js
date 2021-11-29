@@ -12,6 +12,7 @@ class clientSignUp extends React.Component {
   }
   handlesignup = (values) => {
     values.rolename = "client";
+    values.empId="empId";
     console.log(values);
     this.setState({ loading: true })
     try {
@@ -113,7 +114,7 @@ class clientSignUp extends React.Component {
                                     />
                                   </Form.Item>
                                 </div>
-                                <div class="form-group">
+                                {/* <div class="form-group">
                                   <Form.Item
                                     name="empId"
                                     rules={[
@@ -129,7 +130,25 @@ class clientSignUp extends React.Component {
                                       placeholder="empolyee id"
                                     />
                                   </Form.Item>
-                                </div>
+                                </div> */}
+                                 <div class="form-group ">
+                                <Form.Item
+                                  name="email"
+                                  rules={[
+                                    {
+                                      required: true,
+                                      message:
+                                        'Please input your email',
+                                    },
+                                  ]}>
+                                  <Input
+                                    className="form-control"
+                                    type="email"
+                                    placeholder="email"
+                                  />
+                                </Form.Item>
+                              </div>
+
                               </div>
 
                               <div class="col-6">
@@ -194,7 +213,7 @@ class clientSignUp extends React.Component {
                                 </div>
                               </div>
 
-                              <div class="form-group ">
+                              {/* <div class="form-group ">
                                 <Form.Item
                                   name="email"
                                   rules={[
@@ -210,7 +229,7 @@ class clientSignUp extends React.Component {
                                     placeholder="email"
                                   />
                                 </Form.Item>
-                              </div>
+                              </div> */}
 
                               <div class="col-6">
                                 <div class="form-group">
