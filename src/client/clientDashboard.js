@@ -69,7 +69,9 @@ const ClientDashboard = () => {
           <div class="  logo-sec h-lg-100">
             <div class="d-flex flex-row login h-100">
               <div class=" w-100 text-center">
-                <img src="images/logo.png" alt="" srcset="" />
+                <Link to="/">
+                  <img src="images/logo.png" alt="" srcset="" />
+                </Link>
               </div>
             </div>
           </div>

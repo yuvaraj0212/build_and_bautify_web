@@ -15,4 +15,6 @@ export const updateClient = (data) => Axios({  method: 'post',url: `${baseUrl}/u
 
 export const getClient = () => Axios({  method: 'get',url: `${baseUrl}/get-client`});
 
-export const deleteClient = (data) =>Axios({method: 'delete',url: `${baseUrl}/delete-client`,params: data})
+export const deleteClient = (data) =>Axios({method: 'delete',url: `${baseUrl}/delete-client`,params: data});
+
+export const getEnquiry = () => Axios({  method: 'get',url: `${baseUrl}/get-client-enquiry`});

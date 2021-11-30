@@ -10,6 +10,7 @@ import EditClient from './dashboard/edit-client';
 import clientLogin from './client/clientLogin';
 import clientSignUp from './client/clientSignup';
 import clientDashboard from './client/clientDashboard';
+import Enquiry from './dashboard/notification';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
     <Route exact path="/client-dashboard" component={clientDashboard} />
     <Route path="/create-client" component={AddClient}/>
     <Route path={"/edit-client/:id"} component={EditClient}/>
+    <Route path={"/enquiry"} component={Enquiry}/>
     
     </Switch>
     </BrowserRouter>

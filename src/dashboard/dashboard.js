@@ -4,34 +4,36 @@ import { Link, useHistory } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { notification, Divider, Modal, Button, Space } from 'antd';
 import {
-  ExclamationCircleOutlined
+  ExclamationCircleOutlined, BellOutlined
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import { deleteClient, getClient } from "../url_helper";
+import { deleteClient, getClient, getEnquiry } from "../url_helper";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 const { confirm } = Modal;
 const Dashboard = () => {
   const history = new useHistory();
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
+  const [enquiry, setEnquiry] = useState([]);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-
+  console.log(enquiry);
 
 
   const fetchData = () => {
     getClient().then((res) => {
       if (res.data.status === 200) {
         setData(res.data.result)
-
-        // window.location.href = "/dashboard" // history.push("/dashboard");
-
-      } else {
       }
-    })
+    });
+    getEnquiry().then((res) => {
+      if (res.data.status === 200) {
+        setEnquiry(res.data.result)
+      }
+    });
   }
 
   const showConfirm = (event, id) => {
@@ -113,7 +115,12 @@ const Dashboard = () => {
 
               </div>
             </div>
-            <a class="p-2 ">Notification</a>
+            <a class="p-2 ">
+              <Link to="/enquiry">
+                Notification
+              </Link>
+              {/* <span className="rounded-circle">{enquiry.length}</span> */}
+            </a>
             <a class="p-2 ">Reward</a>
 
           </nav>

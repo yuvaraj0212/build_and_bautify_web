@@ -16,28 +16,28 @@ class clientLogin extends React.Component {
   };
 
   handleLogin = (values) => {
-    
+
     try {
       signin(values).then((res) => {
         if (res.data.status === 200) {
           console.log(res.data.result.rolename)
-          if (res.data.result.rolename==='client') {
+          if (res.data.result.rolename === 'client') {
             console.log(res.data.result.id)
-            sessionStorage.setItem("clientId",res.data.result.id)
+            sessionStorage.setItem("clientId", res.data.result.id)
             console.log(res);
             notification.success({
               message: res.data.message,
               description: 'This feature has been updated later!',
             })
             this.props.history.push("/client-dashboard");
-            
+
           } else {
             notification.warn({
               message: "Email Notavilable in client Role",
               description: 'This feature has been updated later!',
             })
           }
-         
+
         } else {
           notification.warn({
             message: res.data.message,
@@ -62,18 +62,20 @@ class clientLogin extends React.Component {
           <div class="  logo-sec h-lg-100">
             <div class="d-flex flex-row login h-100">
               <div class=" w-100 text-center">
-                <img src="images/logo.png" alt="" srcset="" />
+                <Link to="/">
+                  <img src="images/logo.png" alt="" srcset="" />
+                </Link>
               </div>
             </div>
           </div>
           <div class=" d-flex  tile-sec w-100 h-100">
             <div class="d-flex flex-row login h-lg-100">
               <div class=" w-100 ">
-                <div class="card m-auto p-3 pt-2 " style={{border:'none',height:'430px',width:'357px'}}> 
+                <div class="card m-auto p-3 pt-2 " style={{ border: 'none', height: '430px', width: '357px' }}>
                   <div class="card-body">
                     <Form onFinish={this.handleLogin}>
                       <h3>Sign In</h3>
-                     
+
                       <div className="form-group mt-4">
                         <label>Email address</label>
                         <Form.Item
@@ -93,7 +95,7 @@ class clientLogin extends React.Component {
                         </Form.Item>
                       </div>
                       <div className="form-group form-forgot">
-                      <label>Password </label>
+                        <label>Password </label>
                         <Form.Item
                           name="password"
                           rules={[
@@ -101,8 +103,8 @@ class clientLogin extends React.Component {
                               required: true,
                               message:
                                 'Please input your password!',
-                            },{
-                              pattern:/^.{6,}$/,
+                            }, {
+                              pattern: /^.{6,}$/,
                               message: `password contains at least Six characters`
                             }
                           ]}>
@@ -113,15 +115,15 @@ class clientLogin extends React.Component {
                           />
                         </Form.Item>
                       </div>
-                     
+
                       <div class="sign-link mt-4 mb-4">
                         <h6>Forgot Password</h6>
                         <Link to='/client-signup'>
                           <a
                             className='text-decoration-none'
-                            // href="Signup.html"
-                            // target="_blank"
-                           
+                          // href="Signup.html"
+                          // target="_blank"
+
                           >
                             <h6 className="text-primary ">Signup</h6>
                           </a>
@@ -131,7 +133,7 @@ class clientLogin extends React.Component {
                       </div>
                       <button htmlType="submit" class="btn btn-primary" >Login</button>
                     </Form>
-                    
+
                   </div>
                 </div>
               </div>

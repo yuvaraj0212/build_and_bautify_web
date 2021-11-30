@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { notification, Form, Input } from 'antd';
 import { signup } from "../url_helper";
+import { Link } from "react-router-dom";
 
 class SignUp extends React.Component {
   constructor() {
@@ -50,18 +51,20 @@ class SignUp extends React.Component {
     return (
       <>
         {
-          loading ?  <div class="d-flex justify-content-center">
-              <div class="spinner-border " style={{ width: '5rem', height: '5rem', marginTop: "25%" }} role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+          loading ? <div class="d-flex justify-content-center">
+            <div class="spinner-border " style={{ width: '5rem', height: '5rem', marginTop: "25%" }} role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
+          </div>
             :
             <div class="wrapper h-100">
               <div class="d-lg-flex flex-lg-row login h-lg-100">
                 <div class="  logo-sec h-lg-100">
                   <div class="d-flex flex-row login h-100">
                     <div class=" w-100 text-center">
-                      <img src="images/logo.png" alt="" srcset="" />
+                      <Link to="/">
+                        <img src="images/logo.png" alt="" srcset="" />
+                      </Link>
                     </div>
                   </div>
                 </div>

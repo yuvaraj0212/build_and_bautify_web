@@ -11,7 +11,9 @@ class LandingScreen extends React.Component {
             <div class="  logo-sec h-lg-100">
               <div class="d-flex flex-row login h-100">
                 <div class=" w-100 text-center">
-                  <img src="images/logo.png" alt="" srcset="" />
+                  <Link to="/">
+                    <img src="images/logo.png" alt="" srcset="" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -27,9 +29,9 @@ class LandingScreen extends React.Component {
                       </Link>
                       <br />
                       <Link to="/client-login">
-                      <a class="btn btn-primary mt-5">
-                        Login as Client
-                      </a>
+                        <a class="btn btn-primary mt-5">
+                          Login as Client
+                        </a>
                       </Link>
                     </div>
                   </div>

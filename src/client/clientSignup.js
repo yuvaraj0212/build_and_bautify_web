@@ -2,6 +2,7 @@ import React from "react";
 import "../main-screen/style.css";
 import { notification, Form, Input } from 'antd';
 import { signup } from "../url_helper";
+import { Link } from "react-router-dom";
 
 class clientSignUp extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ class clientSignUp extends React.Component {
   }
   handlesignup = (values) => {
     values.rolename = "client";
-    values.empId="empId";
+    values.empId = "empId";
     console.log(values);
     this.setState({ loading: true })
     try {
@@ -51,18 +52,20 @@ class clientSignUp extends React.Component {
     return (
       <>
         {
-          loading ?  <div class="d-flex justify-content-center">
-              <div class="spinner-border " style={{ width: '5rem', height: '5rem', marginTop: "25%" }} role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+          loading ? <div class="d-flex justify-content-center">
+            <div class="spinner-border " style={{ width: '5rem', height: '5rem', marginTop: "25%" }} role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
+          </div>
             :
             <div class="wrapper h-100">
               <div class="d-lg-flex flex-lg-row login h-lg-100">
                 <div class="  logo-sec h-lg-100">
                   <div class="d-flex flex-row login h-100">
                     <div class=" w-100 text-center">
-                      <img src="images/logo.png" alt="" srcset="" />
+                      <Link to="/">
+                        <img src="images/logo.png" alt="" srcset="" />
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -131,23 +134,23 @@ class clientSignUp extends React.Component {
                                     />
                                   </Form.Item>
                                 </div> */}
-                                 <div class="form-group ">
-                                <Form.Item
-                                  name="email"
-                                  rules={[
-                                    {
-                                      required: true,
-                                      message:
-                                        'Please input your email',
-                                    },
-                                  ]}>
-                                  <Input
-                                    className="form-control"
-                                    type="email"
-                                    placeholder="email"
-                                  />
-                                </Form.Item>
-                              </div>
+                                <div class="form-group ">
+                                  <Form.Item
+                                    name="email"
+                                    rules={[
+                                      {
+                                        required: true,
+                                        message:
+                                          'Please input your email',
+                                      },
+                                    ]}>
+                                    <Input
+                                      className="form-control"
+                                      type="email"
+                                      placeholder="email"
+                                    />
+                                  </Form.Item>
+                                </div>
 
                               </div>
 
