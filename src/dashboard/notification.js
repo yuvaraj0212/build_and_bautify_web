@@ -12,7 +12,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 const { confirm } = Modal;
 const Enquiry = () => {
     const history = new useHistory();
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(NaN || '');
     const [enquiry, setEnquiry] = useState([]);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const Enquiry = () => {
                         <div class="col-4 text-center">
 
                         </div>
-                    
+
                     </div>
 
                 </div>
@@ -111,8 +111,10 @@ const Enquiry = () => {
                                             return item;
                                         } else if (item.userModel.name.toLowerCase().includes(search.toLowerCase())) {
                                             return item;
+                                        } else if (item.userModel.phone.includes(search)) {
+                                            return item;
                                         }
-                                    }).map((val,index) => (
+                                    }).map((val, index) => (
                                         <tr key={val.id}>
                                             <td>{val.id}</td>
                                             <td>{val.userModel.name}</td>
@@ -121,7 +123,7 @@ const Enquiry = () => {
                                             <td>{val.category}</td>
                                             <td>{val.quantity}</td>
                                             <td>{val.complaint}</td>
-                                         
+
                                         </tr>
                                     )) : <tr><p className="text-center m-100 color-blue">No data found</p></tr>
                                 }
