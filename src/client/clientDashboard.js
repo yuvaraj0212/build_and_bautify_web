@@ -223,7 +223,7 @@ const style ={
 
                         </div>
                         <div className="form-group">
-                          <button type='submit' style={style} class="btn-primary p-2 form-control" >Submit</button>
+                          <button type='submit' style={style} class="p-2 form-control" >Submit</button>
                         </div>
                       </div>
                     </Form>
