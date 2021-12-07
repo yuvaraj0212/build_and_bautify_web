@@ -59,7 +59,11 @@ const ClientDashboard = () => {
     "Hardware Tools"
   ]
 
-
+const style ={
+  color: '#fff' ,
+  backgroundColor: '#344e89',
+  borderRadius: '5px',
+}
 
 
   return (
@@ -219,7 +223,7 @@ const ClientDashboard = () => {
 
                         </div>
                         <div className="form-group">
-                          <button type='submit' class="btn-primary p-2 form-control" >Submit</button>
+                          <button type='submit' style={style} class="btn-primary p-2 form-control" >Submit</button>
                         </div>
                       </div>
                     </Form>
