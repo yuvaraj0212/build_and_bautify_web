@@ -69,7 +69,7 @@ class clientSignUp extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div class=" d-flex  tile-sec w-100 h-100">
+                <div class=" d-flex  tile-sec w-100 ">
                   <div class="d-flex flex-row login h-lg-100">
                     <div class=" w-100 ">
 
@@ -79,8 +79,25 @@ class clientSignUp extends React.Component {
                           <h3>Sign Up</h3>
                           <Form onFinish={this.handlesignup}>
 
-                            <div class="row mt-3 mb-4">
-                              <div class="col-6">
+                            <div class="row  ">
+                              <div class="form-group mb-0">
+                                <Form.Item
+                                  name="email"
+                                  rules={[
+                                    {
+                                      required: true,
+                                      message:
+                                        'Please input your email',
+                                    },
+                                  ]}>
+                                  <Input
+                                    className="form-control"
+                                    type="email"
+                                    placeholder="email"
+                                  />
+                                </Form.Item>
+                              </div>
+                              <div class="col-lg-6">
 
                                 <div class="form-group">
 
@@ -134,27 +151,11 @@ class clientSignUp extends React.Component {
                                     />
                                   </Form.Item>
                                 </div> */}
-                                <div class="form-group ">
-                                  <Form.Item
-                                    name="email"
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message:
-                                          'Please input your email',
-                                      },
-                                    ]}>
-                                    <Input
-                                      className="form-control"
-                                      type="email"
-                                      placeholder="email"
-                                    />
-                                  </Form.Item>
-                                </div>
+
 
                               </div>
 
-                              <div class="col-6">
+                              <div class="col-lg-6">
                                 <div class="form-group">
                                   <Form.Item
                                     name="dob"
@@ -194,7 +195,7 @@ class clientSignUp extends React.Component {
                                     />
                                   </Form.Item>
                                 </div>
-                                <div class="form-group">
+                                {/* <div class="form-group">
                                   <Form.Item
                                     name="adharNo"
                                     rules={[
@@ -213,7 +214,7 @@ class clientSignUp extends React.Component {
                                       placeholder="adhar number"
                                     />
                                   </Form.Item>
-                                </div>
+                                </div> */}
                               </div>
 
                               {/* <div class="form-group ">

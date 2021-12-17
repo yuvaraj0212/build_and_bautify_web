@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
-const baseUrl = 'http://13.235.132.111/BuildAndBeautify';
-// const baseUrl = 'http://localhost:8080';
+// const baseUrl = 'http://13.235.132.111/BuildAndBeautify';
+const baseUrl = 'http://localhost:8080';
 
 export const signin = (data) => Axios({  method: 'post',url: `${baseUrl}/signin`, data:data});
 
@@ -18,3 +18,7 @@ export const getClient = () => Axios({  method: 'get',url: `${baseUrl}/get-clien
 export const deleteClient = (data) =>Axios({method: 'delete',url: `${baseUrl}/delete-client`,params: data});
 
 export const getEnquiry = () => Axios({  method: 'get',url: `${baseUrl}/get-client-enquiry`});
+
+export const getNotifyction = () => Axios({  method: 'get',url: `${baseUrl}/notify`});
+
+export const getDelNotifyction = () => Axios({  method: 'get',url: `${baseUrl}/delnotify`});

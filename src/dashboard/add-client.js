@@ -6,6 +6,7 @@ import TextArea from "rc-textarea";
 import { createClient } from "../url_helper";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 const { Option } = Select;
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -24,13 +25,15 @@ const tailFormItemLayout = {
   },
 };
 class AddClient extends React.Component {
- constructor(){
-   super();
-   this.state = {
-     number : ''
-   }
-   this.handleKeyDown =this.handleKeyDown.bind(this)
- }
+  constructor() {
+    super();
+    this.state = {
+      number: '',
+    }
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+  }
+  
+  
   handleSubmit = (values) => {
     console.log(values);
     try {
@@ -46,7 +49,7 @@ class AddClient extends React.Component {
 
         } else {
           notification.warn({
-            message: res.data.message,
+            message: res.data.error,
             description: 'This feature has been updated later!',
           })
         }
@@ -62,13 +65,12 @@ class AddClient extends React.Component {
 
   handleKeyDown(e) {
     const re = /^[0-9\b]+$/;
-    console.log('e',e.target.value)
-    if(!(e.target.value) === 'e' || re.test(e.target.value))
-    {
-      console.log('sdae',e.target.value)
-      this.setState({ number : e.target.value})
+    console.log('e', e.target.value)
+    if (!(e.target.value) === 'e' || re.test(e.target.value)) {
+      console.log('sdae', e.target.value)
+      this.setState({ number: e.target.value })
     }
- }
+  }
 
   render() {
     const categoryTypes = [
@@ -97,68 +99,22 @@ class AddClient extends React.Component {
                 />
               </div>
               <div class="col-4 text-center"></div>
-              <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="text-muted" href="#">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="mx-3"
-                  >
-                    <circle cx="10.5" cy="10.5" r="7.5"></circle>
-                    <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
-                  </svg>
-                </a>
-                <a class="btn btn-sm btn-outline-secondary" href="#">
-                  Sign up
-                </a>
-              </div>
+
             </div>
           </div>
           <div class="nav-scroller py-1 mb-2">
-            <nav
-              class="nav d-flex justify-content-end"
-              style={{ backgroundColor: "#505152" }}
-            >
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Request
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item">
-                    Service/
-                    <br />
-                    Complaint/
-                    <br />
-                    support
-                  </a>
-                  <a class="dropdown-item text-dark">
-                    Product <br /> Request
-                  </a>
-                </div>
-              </div>
-              <a class="p-2" href="#">
-                Notification
-              </a>
-              <a class="p-2 " href="#">
-                Reward
-              </a>
+            <nav class="nav px-3 d-flex justify-content-end text-white bg-dark">
+              <Link to="/enquiry" class="icon p-2">
+                <div class="txt">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="23" fill="currentColor" class=" bi bi-bell " viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                  </svg></div>
+                {this.props.notify >0? <div class="txt1">{this.props.notify} </div>:''} 
+              </Link>
+              <a class="p-2 ">Reward</a>
             </nav>
           </div>
-          <Breadcrumb>
+          <Breadcrumb class="mx-2 ">
             <Breadcrumb.Item >
               <Link to="/">
                 Login
@@ -183,7 +139,7 @@ class AddClient extends React.Component {
                       label="Email Address"
                       rules={[
                         {
-                          required: true,
+                          // required: true,
                           message: "Please input your email!",
                         },
                       ]}
@@ -245,7 +201,7 @@ class AddClient extends React.Component {
                       label="Category"
                       rules={[{ required: true, message: 'Please select Category!' }]}
                     >
-                      <Select placeholder="select your Category">
+                      <Select mode="multiple" placeholder="select your Category">
                         {/* <Option value="1">1</Option> */}
                         {categoryTypes.map((item) => {
                           return <Option key={item} value={item}>{item}</Option>
@@ -311,8 +267,8 @@ class AddClient extends React.Component {
                         className="form-control"
                         type="number"
                         placeholder="mobile number"
-                        // value={this.state.number}
-                        // onKeyPress={this.handleKeyDown}
+                      // value={this.state.number}
+                      // onKeyPress={this.handleKeyDown}
                       />
                     </Form.Item>
                   </div>
@@ -408,5 +364,9 @@ class AddClient extends React.Component {
     );
   }
 }
-
-export default AddClient;
+ const mapStatetopProps=(props)=>{
+   return{
+     notify:props.notifycation.notify
+   }
+ }
+export default connect(mapStatetopProps)(AddClient);

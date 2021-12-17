@@ -111,18 +111,18 @@ const EditClient = () => {
   return (
     <>
       <div class="wrapper h-100">
-        <div class="container-fluid">
-          <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4 pt-1">
-              <img
-                src="images/logo.png"
-                alt=""
-                srcset=""
-                style={{ width: "125px" }}
-              />
-            </div>
-            <div class="col-4 text-center"></div>
-            <div class="col-4 d-flex justify-content-end align-items-center">
+          <div class="container-fluid">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+              <div class="col-4 pt-1">
+                <img
+                  src="images/logo.png"
+                  alt=""
+                  srcset=""
+                  style={{ width: "125px" }}
+                />
+              </div>
+              <div class="col-4 text-center"></div>
+            {/* <div class="col-4 d-flex justify-content-end align-items-center">
               <a class="text-muted" href="#">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +143,7 @@ const EditClient = () => {
               <a class="btn btn-sm btn-outline-secondary" href="#">
                 Sign up
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
         <div class="nav-scroller py-1 mb-2">

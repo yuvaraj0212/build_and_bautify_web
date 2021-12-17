@@ -31,6 +31,7 @@
 }
 .tile-sec{
     background: #f3f3f3;
+    height: 100%!important;
 }
 .card-tag{
     border:none;
@@ -41,7 +42,10 @@
     border: none;
     width: 70% !important;
 }
-
+.sign-cards{
+    border: none;
+    width: 50% !important;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -53,3 +57,48 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+.icon {
+    /* width:30px; 
+    height:30px; */
+    position: relative;
+}
+.txt1{
+    font-size: x-small;
+    position: absolute;
+    padding: 4px;
+    top: -4px;
+    right: 2px;
+    border-radius: 25px;
+    color: #eaffc5;
+    background-color: #2abf77;
+}
+.txt{
+    /* background: rgb(47, 219, 12); */
+    /* font-size: xx-small; */
+    /* position: absolute; */
+    padding: 2px;
+    /* top: -7px;
+    right: -13px; */
+    border-radius: 25px;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .login{
+        align-items: center;
+        position: relative !important;
+        /* height: 70%!important; */
+        width: 100% !important;
+    }
+    .tile-sec{
+        background: #f3f3f3;
+        height: 75%!important;
+    }
+    .sign-card{
+        border: none;
+        width: 80% !important;
+    }
+    .sign-cards{
+        border: none;
+        width: 80% !important;
+    }
+  }

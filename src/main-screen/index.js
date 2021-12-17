@@ -17,7 +17,7 @@ class LandingScreen extends React.Component {
                 </div>
               </div>
             </div>
-            <div class=" d-flex  tile-sec w-100 h-100">
+            <div class=" d-flex  tile-sec w-100 ">
               <div class="d-flex flex-row login h-100">
                 <div class=" w-100 text-center">
                   <div class="card m-auto p-3 pt-5 card-tag">

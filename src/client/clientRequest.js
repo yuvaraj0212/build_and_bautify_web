@@ -1,65 +1,89 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../main-screen/style.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Modal, Select, Form, Input, Button, notification } from "antd";
+
+import {
+  ExclamationCircleOutlined
+} from '@ant-design/icons';
 import 'antd/dist/antd.css';
+import { createClientEnquiry, deleteClient, getClient } from "../url_helper";
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import TextArea from "rc-textarea";
+const { confirm } = Modal;
+const { Option } = Select;
 
-const ClientDashboard = () => {
-  // const history = useHistory();
-  // const handlesignup = (value) => {
-  //   const id = sessionStorage.getItem("clientId");
-  //   console.log(id);
-  //   value.clientId = id;
-  //   console.log(value);
-  //   try {
-  //     createClientEnquiry(value).then((res) => {
-  //       if (res.data.status === 200) {
-  //         console.log(res);
-  //         notification.success({
-  //           message: res.data.message,
-  //           description: 'This feature has been updated later!',
-  //         })
-  //         document.getElementById('enquiryForm').reset()
-  //         // history.push("/client-dashboard");
 
-  //       } else {
-  //         notification.warn({
-  //           message: res.data.message,
-  //           description: 'This feature has been updated later!',
-  //         })
-  //       }
-  //     })
-  //   } catch (error) {
-  //     console.error(error)
-  //     notification.error({
-  //       message: error.message,
-  //       description: 'This feature has been updated later!',
-  //     })
-  //   }
-  // };
-  // const categoryTypes = [
-  //   "Steel & cement",
-  //   "Electrical",
-  //   "Sanitory|Tile|Plumbing",
-  //   "paints",
-  //   "Water proofing",
-  //   "Playwoods|Glasses",
-  //   "Kitchen Items",
-  //   "Water treatment",
-  //   "Mosqito slveeas",
-  //   "Hardware Tools"
-  // ]
+const ClientRequest = () => {
+  const history = useHistory();
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    notify();
+  }, []);
 
-  // const style = {
-  //   color: '#fff',
-  //   backgroundColor: '#344e89',
-  //   borderRadius: '5px',
-  // }
+  const notify = () => setCount(Number(sessionStorage.getItem('notify')));
+
+  const handlesignup = (value) => {
+    const id = sessionStorage.getItem("clientId");
+    // console.log(id);
+    value.clientId = id;
+    // console.log(value);
+    try {
+      createClientEnquiry(value).then((res) => {
+        const addcount = count + 1;
+        sessionStorage.setItem('notify', addcount);
+        notify();
+        if (res.data.status === 200) {
+          console.log(res);
+          notification.success({
+            message: res.data.message,
+            description: 'This feature has been updated later!',
+          })
+          sessionStorage.setItem('notify', 0)
+          document.getElementById('enquiryForm').reset()
+          history.push("/client-dashboard");
+
+        } else {
+          notification.warn({
+            message: res.data.message,
+            description: 'This feature has been updated later!',
+          })
+        }
+      })
+
+    } catch (error) {
+      console.error(error)
+      notification.error({
+        message: error.message,
+        description: 'This feature has been updated later!',
+      })
+    } console.log(count);
+  };
+  const categoryTypes = [
+    "Steel & cement",
+    "Electrical",
+    "Sanitory|Tile|Plumbing",
+    "paints",
+    "Water proofing",
+    "Playwoods|Glasses",
+    "Kitchen Items",
+    "Water treatment",
+    "Mosqito slveeas",
+    "Hardware Tools"
+  ]
+
+  const style = {
+    color: '#fff',
+    backgroundColor: '#344e89',
+    borderRadius: '5px',
+  }
 
 
   return (
     <>
       <div class="wrapper h-100">
-        <div class="d-lg-flex flex-lg-row login h-lg-100">
+        <div class="d-lg-flex flex-lg-row login h-100 mt-1">
           <div class="  logo-sec h-lg-100">
             <div class="d-flex flex-row login h-100">
               <div class=" w-100 text-center">
@@ -69,28 +93,7 @@ const ClientDashboard = () => {
               </div>
             </div>
           </div>
-          <div class=" d-flex  tile-sec w-100 ">
-              <div class="d-flex flex-row login h-100">
-                <div class=" w-100 text-center">
-                  <div class="card m-auto p-3 pt-5 card-tag">
-                    <div class="card-body">
-                      <Link to="client-request">
-                        <a class="btn btn-primary">
-                          Product Request
-                        </a>
-                      </Link>
-                      <br />
-                      <Link to="/client-service">
-                        <a class="btn btn-primary mt-5">
-                        Support | Service | Complaint
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {/* <div class=" d-flex  tile-sec w-100 h-100">
+          <div class=" d-flex  tile-sec w-100 h-100     ">
             <div class="d-flex flex-row login h-lg-100">
               <div class=" w-100 mt-5 ">
 
@@ -103,24 +106,9 @@ const ClientDashboard = () => {
 
                         <div className="col-lg-6" >
                           <div className="form-group">
-                            <label>Category</label>
+                            <label>Product Name 1</label>
                             <Form.Item
-                              name="category"
-                              // label="Category"
-                              rules={[{ required: true, message: 'Please select Category!' }]}
-                            >
-                              <Select placeholder="select your Category">
-                                {/* <Option value="1">1</Option> 
-                                {categoryTypes.map((item) => {
-                                  return <Option key={item} value={item}>{item}</Option>
-                                })}
-                              </Select>
-                            </Form.Item>
-                          </div>
-                          <div className="form-group">
-                            <label>Product Name</label>
-                            <Form.Item
-                              name="product"
+                              name="product2"
                               // label="Product Name"
                               rules={[
                                 {
@@ -137,6 +125,21 @@ const ClientDashboard = () => {
                               />
                             </Form.Item>
                           </div>
+                          <div className="form-group">
+                            <label>Category</label>
+                            <Form.Item
+                              name="category"
+                              rules={[{ required: true, message: 'Please select Category!' }]}
+                            >
+                              <Select mode="multiple" placeholder="select your Category">
+                                {/* <Option value="1">1</Option> */}
+                                {categoryTypes.map((item) => {
+                                  return <Option key={item} value={item}>{item}</Option>
+                                })}
+                              </Select>
+                            </Form.Item>
+                          </div>
+
                           <div className="form-group">
                             <label>Quantity</label>
                             <Form.Item
@@ -159,25 +162,8 @@ const ClientDashboard = () => {
 
                         </div>
                         <div className="col-lg-6" >
-                          {/* <div className="form-group mt-4">
-                        <label>New Enquiry</label>
-                        <Form.Item
-                          name="enquiry"
-                          rules={[
-                            {
-                              required: true,
-                              message:
-                                'Please input your enquiry!',
-                            },
-                          ]}>
-                          <Select placeholder="select your type of customer">
-                            <Option value="Category">Category</Option>
-                            <Option value="Product">Product</Option>
-                            <Option value="Quantity">Quantity</Option>
-                          </Select>
-                        </Form.Item>
-                      </div> 
-                          <div className="form-group ">
+
+                          {/* <div className="form-group ">
                             <label>Support|Service|Complaint</label>
                             <Form.Item
                               name="complaint"
@@ -193,6 +179,26 @@ const ClientDashboard = () => {
                                 <Option value="Installation">Installation</Option>
                               </Select>
                             </Form.Item>
+                          </div> */}
+                          <div className="form-group">
+                            <label>Product Name 2</label>
+                            <Form.Item
+                              name="product"
+                              // label="Product Name"
+                              rules={[
+                                {
+                                  required: false,
+                                  message: "Please input product name!",
+                                },
+                              ]}
+
+                            >
+                              <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="product name"
+                              />
+                            </Form.Item>
                           </div>
                           <div className="form-group ">
                             <label>Other</label>
@@ -200,7 +206,7 @@ const ClientDashboard = () => {
                               name="other"
                               rules={[
                                 {
-                                  required: true,
+                                  required: false,
                                   message:
                                     'Please input your other!',
                                 },
@@ -225,9 +231,9 @@ const ClientDashboard = () => {
                               ]}
                             >
                               <TextArea
-                                className="form-control"
+                                className="form-control "
                                 placeholder="Comments"
-                                autoSize={{ minRows: 4, }}
+                                autoSize={{ minRows: 5, }}
                               />
                             </Form.Item>
                           </div>
@@ -238,12 +244,13 @@ const ClientDashboard = () => {
                         </div>
                       </div>
                     </Form>
+                    {/* style="margin-top:30px !important" */}
                   </div>
                 </div>
 
-              </div> *
+              </div>
             </div>
-           </div>*/}
+          </div>
         </div>
       </div>
     </>
@@ -251,4 +258,4 @@ const ClientDashboard = () => {
 }
 
 
-export default ClientDashboard;
+export default ClientRequest;

@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Switch, Route,BrowserRouter } from 'react-router-dom';
 import LandingScreen from './main-screen/index';
@@ -11,6 +10,8 @@ import clientLogin from './client/clientLogin';
 import clientSignUp from './client/clientSignup';
 import clientDashboard from './client/clientDashboard';
 import Enquiry from './dashboard/notification';
+import ClientRequest from './client/clientRequest';
+import ClientSrevice from './client/clientService';
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
     <Route path="/create-client" component={AddClient}/>
     <Route path={"/edit-client/:id"} component={EditClient}/>
     <Route path={"/enquiry"} component={Enquiry}/>
-    
+    <Route exact path="/client-request" component={ClientRequest} />
+    <Route exact path="/client-service" component={ClientSrevice} />
     </Switch>
     </BrowserRouter>
 

@@ -71,7 +71,7 @@ class Login extends React.Component {
               </div>
             </div>
           </div>
-          <div class=" d-flex  tile-sec w-100 h-100">
+          <div class=" d-flex  tile-sec w-100 ">
             <div class="d-flex flex-row login h-lg-100">
               <div class=" w-100 ">
                 <div class="card m-auto p-3 pt-2 " style={{ border: 'none', height: '430px', width: '357px' }}>
