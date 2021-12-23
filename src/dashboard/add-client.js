@@ -25,15 +25,15 @@ const tailFormItemLayout = {
   },
 };
 class AddClient extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       number: '',
     }
     this.handleKeyDown = this.handleKeyDown.bind(this)
   }
   
-  
+ 
   handleSubmit = (values) => {
     console.log(values);
     try {
@@ -49,7 +49,7 @@ class AddClient extends React.Component {
 
         } else {
           notification.warn({
-            message: res.data.error,
+            message: res.data.message,
             description: 'This feature has been updated later!',
           })
         }
@@ -73,6 +73,7 @@ class AddClient extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const categoryTypes = [
       "Steel & cement",
       "Electrical",
@@ -139,7 +140,7 @@ class AddClient extends React.Component {
                       label="Email Address"
                       rules={[
                         {
-                          // required: true,
+                          // required: false,
                           message: "Please input your email!",
                         },
                       ]}
@@ -158,7 +159,7 @@ class AddClient extends React.Component {
                       label="customer Name"
                       rules={[
                         {
-                          required: true,
+                          required: false,
                           message: "Please input your username!",
                         },
                       ]}
@@ -178,7 +179,7 @@ class AddClient extends React.Component {
                       label="customer Type "
                       rules={[
                         {
-                          required: true,
+                          required: false,
                           message: "Please input type of client!",
                         },
                       ]}
@@ -199,7 +200,7 @@ class AddClient extends React.Component {
                       {...formItemLayout}
                       name="category"
                       label="Category"
-                      rules={[{ required: true, message: 'Please select Category!' }]}
+                      rules={[{ required: false, message: 'Please select Category!' }]}
                     >
                       <Select mode="multiple" placeholder="select your Category">
                         {/* <Option value="1">1</Option> */}
@@ -216,7 +217,7 @@ class AddClient extends React.Component {
                       label="Product Name"
                       rules={[
                         {
-                          required: true,
+                          required: false,
                           message: "Please input product name!",
                         },
                       ]}
@@ -236,7 +237,7 @@ class AddClient extends React.Component {
                       label="Others"
                       rules={[
                         {
-                          required: true,
+                          required: false,
                           message: "Please input your brand!",
                         },
                       ]}
@@ -258,7 +259,7 @@ class AddClient extends React.Component {
                       label="Mobile Number"
                       rules={[
                         {
-                          required: true,
+                          required: false,
                           message: "Please input your mobile number!",
                         },
                       ]}
@@ -280,7 +281,7 @@ class AddClient extends React.Component {
                       label="Source of Lead"
                       rules={[
                         {
-                          required: true,
+                          required: false,
                           message: "Please input your source of Lead!",
                         },
                       ]}
@@ -300,7 +301,7 @@ class AddClient extends React.Component {
                       label="Address"
                       rules={[
                         {
-                          required: true,
+                          required: false,
                           message: "Please input your address!",
                         },
                       ]}
@@ -318,7 +319,7 @@ class AddClient extends React.Component {
                         label="Quantity"
                         rules={[
                           {
-                            required: true,
+                            required: false,
                             message: "Please input your quantity!",
                           },
                         ]}
@@ -337,7 +338,7 @@ class AddClient extends React.Component {
                         label="Comment"
                         rules={[
                           {
-                            required: true,
+                            required: false,
                             message: "Please input your comment!",
                           },
                         ]}
@@ -365,6 +366,7 @@ class AddClient extends React.Component {
   }
 }
  const mapStatetopProps=(props)=>{
+   console.log(props);
    return{
      notify:props.notifycation.notify
    }

@@ -13,7 +13,6 @@ class clientSignUp extends React.Component {
   }
   handlesignup = (values) => {
     values.rolename = "client";
-    values.empId = "empId";
     console.log(values);
     this.setState({ loading: true })
     try {
@@ -121,11 +120,11 @@ class clientSignUp extends React.Component {
                                   <Form.Item
                                     name="gender"
                                     rules={[
-                                      {
-                                        required: true,
-                                        message:
-                                          'Please input your gender!',
-                                      },
+                                      // {
+                                      //   required: true,
+                                      //   message:
+                                      //     'Please input your gender!',
+                                      // },
                                     ]}>
                                     <Input
                                       className="form-control"
@@ -160,11 +159,11 @@ class clientSignUp extends React.Component {
                                   <Form.Item
                                     name="dob"
                                     rules={[
-                                      {
-                                        required: true,
-                                        message:
-                                          'Please input your Date of Birth!',
-                                      },
+                                      // {
+                                      //   required: true,
+                                      //   message:
+                                      //     'Please input your Date of Birth!',
+                                      // },
                                     ]}>
                                     <Input
                                       className="form-control"

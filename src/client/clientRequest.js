@@ -1,48 +1,40 @@
 import React, { useEffect, useState } from "react";
 import '../main-screen/style.css';
-import { Link, useHistory } from 'react-router-dom';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { Modal, Select, Form, Input, Button, notification } from "antd";
-
-import {
-  ExclamationCircleOutlined
-} from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import { createClientEnquiry, deleteClient, getClient } from "../url_helper";
-import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import { createClientEnquiry, getNotifyction, } from "../url_helper";
 import TextArea from "rc-textarea";
+import { useDispatch, useSelector } from "react-redux";
+import { AddNotify, getNotify } from "../redux/action/action";
 const { confirm } = Modal;
 const { Option } = Select;
 
-
 const ClientRequest = () => {
-  const history = useHistory();
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    notify();
-  }, []);
-
-  const notify = () => setCount(Number(sessionStorage.getItem('notify')));
-
+  const dispatch = useDispatch();
+  console.log();
+ const props= useSelector(state => state.notifycation.notify)
   const handlesignup = (value) => {
     const id = sessionStorage.getItem("clientId");
-    // console.log(id);
     value.clientId = id;
-    // console.log(value);
+   console.log(value);
     try {
       createClientEnquiry(value).then((res) => {
-        const addcount = count + 1;
-        sessionStorage.setItem('notify', addcount);
-        notify();
+        // notify();
         if (res.data.status === 200) {
-          console.log(res);
+          console.log(props);
+          getNotifyction().then((res) => {
+            if (res.data.status === 200) {
+              console.log(res.data.result);
+              dispatch(AddNotify(res.data.result));
+            }
+          });
           notification.success({
             message: res.data.message,
             description: 'This feature has been updated later!',
-          })
-          sessionStorage.setItem('notify', 0)
-          document.getElementById('enquiryForm').reset()
-          history.push("/client-dashboard");
+          });
+          // document.getElementById('enquiryForm').reset()
+          // history.push("/client-dashboard");
 
         } else {
           notification.warn({
@@ -50,7 +42,7 @@ const ClientRequest = () => {
             description: 'This feature has been updated later!',
           })
         }
-      })
+      });
 
     } catch (error) {
       console.error(error)
@@ -58,7 +50,7 @@ const ClientRequest = () => {
         message: error.message,
         description: 'This feature has been updated later!',
       })
-    } console.log(count);
+    }
   };
   const categoryTypes = [
     "Steel & cement",
@@ -79,6 +71,7 @@ const ClientRequest = () => {
     borderRadius: '5px',
   }
 
+          console.log(props);
 
   return (
     <>
@@ -100,7 +93,7 @@ const ClientRequest = () => {
 
                 <div class="card m-auto p-3 mt-5 pt-2 sign-card"  >
                   <div class="container-fluid mt-3">
-                    <h3>Client Page</h3>
+                    <h3>Request Page</h3>
                     <Form onFinish={handlesignup} id='enquiryForm'>
                       <div className="row">
 
@@ -108,7 +101,7 @@ const ClientRequest = () => {
                           <div className="form-group">
                             <label>Product Name 1</label>
                             <Form.Item
-                              name="product2"
+                              name="product"
                               // label="Product Name"
                               rules={[
                                 {
@@ -131,7 +124,9 @@ const ClientRequest = () => {
                               name="category"
                               rules={[{ required: true, message: 'Please select Category!' }]}
                             >
-                              <Select mode="multiple" placeholder="select your Category">
+                              <Select
+                               mode="multiple"
+                                placeholder="select your Category">
                                 {/* <Option value="1">1</Option> */}
                                 {categoryTypes.map((item) => {
                                   return <Option key={item} value={item}>{item}</Option>
@@ -163,27 +158,10 @@ const ClientRequest = () => {
                         </div>
                         <div className="col-lg-6" >
 
-                          {/* <div className="form-group ">
-                            <label>Support|Service|Complaint</label>
-                            <Form.Item
-                              name="complaint"
-                              rules={[
-                                {
-                                  required: true,
-                                  message:
-                                    'Please input your Complaint!',
-                                },
-                              ]}>
-                              <Select placeholder="select your type of customer">
-                                <Option value="repair & maintenance">repair & maintenance</Option>
-                                <Option value="Installation">Installation</Option>
-                              </Select>
-                            </Form.Item>
-                          </div> */}
                           <div className="form-group">
                             <label>Product Name 2</label>
                             <Form.Item
-                              name="product"
+                              name="product2"
                               // label="Product Name"
                               rules={[
                                 {

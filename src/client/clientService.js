@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import '../main-screen/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Modal, Select, Form, Input, Button, notification } from "antd";
-
-import {
-    ExclamationCircleOutlined
-} from '@ant-design/icons';
+import { Modal, Select, Form, Input, Button, notification, Upload } from "antd";
+import { UploadOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import { createClientEnquiry, deleteClient, getClient } from "../url_helper";
+import { createClientEnquiry, createClientService, deleteClient, getClient } from "../url_helper";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import TextArea from "rc-textarea";
 const { confirm } = Modal;
@@ -22,8 +19,16 @@ const ClientSrevice = () => {
         console.log(id);
         value.clientId = id;
         console.log(value);
+        var bodyFormData = new FormData();
+        bodyFormData.append('productName', value.productName);
+        bodyFormData.append('service', value.service);
+        bodyFormData.append('billno', value.billno);
+        bodyFormData.append('comment', value.comment);
+        bodyFormData.append('mfile', value.mfile.file.originFileObj);
+        bodyFormData.append('clientId', value.clientId);
+        console.log(bodyFormData);
         try {
-            createClientEnquiry(value).then((res) => {
+            createClientService(bodyFormData).then((res) => {
                 if (res.data.status === 200) {
                     console.log(res);
                     notification.success({
@@ -110,7 +115,7 @@ const ClientSrevice = () => {
                                                     <div className="form-group">
                                                         <label>Product Name</label>
                                                         <Form.Item
-                                                            name="product"
+                                                            name="productName"
                                                             // label="Product Name"
                                                             rules={[
                                                                 {
@@ -127,6 +132,28 @@ const ClientSrevice = () => {
                                                             />
                                                         </Form.Item>
                                                     </div>
+                                                    <div className="form-group ">
+                                                        <label>Support </label>
+                                                        <Form.Item
+                                                            name="service"
+                                                            rules={[
+                                                                {
+                                                                    required: true,
+                                                                    message:
+                                                                        'Please input your Support!',
+                                                                },
+                                                            ]}>
+                                                            <Select placeholder="select your type of customer" className="pb-1">
+                                                                <Option value="repair & maintenance">repair & maintenance</Option>
+                                                                <Option value="Installation">Installation</Option>
+                                                            </Select>
+                                                        </Form.Item>
+                                                    </div>
+
+
+                                                    {/* </div> */}
+                                                    {/* <div className="col-lg-6" > */}
+
                                                     <div className="form-group">
                                                         <label>Bill No:</label>
                                                         <Form.Item
@@ -147,25 +174,28 @@ const ClientSrevice = () => {
                                                         </Form.Item>
                                                     </div>
 
-                                                    {/* </div> */}
-                                                    {/* <div className="col-lg-6" > */}
-                                                    <div className="form-group ">
-                                                        <label>Support </label>
+                                                    <div className="form-group">
+                                                        <label>Attach Bill :</label>
                                                         <Form.Item
-                                                            name="Support"
+                                                            name="mfile"
+                                                            
                                                             rules={[
                                                                 {
                                                                     required: true,
-                                                                    message:
-                                                                        'Please input your Support!',
+                                                                    message: "Please Attach your Bill images!",
                                                                 },
-                                                            ]}>
-                                                            <Select placeholder="select your type of customer" className="pb-1">
-                                                                <Option value="repair & maintenance">repair & maintenance</Option>
-                                                                <Option value="Installation">Installation</Option>
-                                                            </Select>
+                                                            ]}
+                                                        >
+                                                            <Upload
+                                                                listType="picture"
+                                                                className="upload-list-inline"
+                                                            >
+                                                                <Button icon={<UploadOutlined />}>Upload</Button>
+                                                            </Upload>
+
                                                         </Form.Item>
                                                     </div>
+
                                                     <div className="form-group">
                                                         <label>comment</label>
                                                         <Form.Item

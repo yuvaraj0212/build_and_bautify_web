@@ -1,19 +1,19 @@
 import { ActionTypes } from "../action/actionTypes";
 
 const initial = {
-    notify: []
+    notify: 0,
 }
 
 export const notifyReduser = (state = initial, { type, payload }) => {
     switch (type) {
-        case ActionTypes.GET_NOTIFY:
+        case ActionTypes.ADD_NOTIFY:
             return { ...state, notify: payload };
-            break;
+        case ActionTypes.GET_NOTIFY:
+            return{ ...state};
         case ActionTypes.DEL_NOTIFY:
-            return state;
-            break;
+            return { ...state, notify: payload };
+       
         default:
             return state;
-            break;
     }
 }

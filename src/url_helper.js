@@ -7,9 +7,11 @@ export const signin = (data) => Axios({  method: 'post',url: `${baseUrl}/signin`
 
 export const signup = (data) => Axios({  method: 'post',url: `${baseUrl}/signup`,data: data});
 
-export const createClient = (data) => Axios({  method: 'post',url: `${baseUrl}/create-client`,data: data});
+export const createClient = (data) => Axios({  method: 'post',url: `${baseUrl}/create-client`,data: data,});
 
 export const createClientEnquiry = (data) => Axios({  method: 'post',url: `${baseUrl}/create-client-enquiry`,data: data});
+
+export const createClientService = (data) => Axios({  method: 'post',url: `${baseUrl}/create-client-service`,data: data,headers:{ "Content-Type": "multipart/form-data"}});
 
 export const updateClient = (data) => Axios({  method: 'post',url: `${baseUrl}/update-client`, data});
 

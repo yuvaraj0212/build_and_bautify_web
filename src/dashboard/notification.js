@@ -96,7 +96,7 @@ const Enquiry = () => {
                                 { title: "Email", field: "userModel.email", },
                                 { title: "Category", field: "category" },
                                 { title: "Qty", field: "quantity" },
-                                { title: "Complaint", field: "complaint" },
+                                // { title: "Complaint", field: "complaint" },
                             ]}
                             data={enquiry}
                             title="Enquiry "

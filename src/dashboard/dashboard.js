@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../main-screen/style.css';
 import { Link, useHistory } from 'react-router-dom';
-import { notification, Divider, Modal, Button, Space } from 'antd';
+import {Modal, Select, Form, Input, Button, notification } from 'antd';
 import {
   ExclamationCircleOutlined, BellOutlined
 } from '@ant-design/icons';
@@ -9,22 +9,39 @@ import MaterialTable from "material-table";
 import 'antd/dist/antd.css';
 import { deleteClient, getClient, getEnquiry, getNotifyction } from "../url_helper";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
-import { useDispatch, useSelector } from "react-redux";
-import { getNotify } from "../redux/action/action";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { AddNotify, getNotify, pushNotify } from "../redux/action/action";
+
+
+import 'antd/dist/antd.css';
+import { createClientEnquiry, } from "../url_helper";
+import TextArea from "rc-textarea";
+
 const { confirm } = Modal;
-const Dashboard = () => {
+
+function Dashboard(props) {
   const history = new useHistory();
+  const [CountData, setCountData] = useState(0);
   const [data, setData] = useState([]);
-  const [enquiry, setEnquiry] = useState([]);
-  const count = useSelector((state) => state.notifycation.notify)
+  // const count = useSelector(state => state.notifycation.notify);
+  const count = props.notify
   const dispatch = useDispatch();
- 
-  useEffect(() => {
-    fetchData();
-  }, []);
- 
-  console.log(count);
+
+  console.log("count",props);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setCountData(CountData + 1);
+  //     getNotifyction().then((res) => {
+  //       if (res.data.status === 200) {
+  //         dispatch(AddNotify(res.data.result));
+  //       }
+  //     }); 
+  //   }, 10000);
+
+  // });
   const fetchData = () => {
+
+    console.log("props",props);
     getClient().then((res) => {
       if (res.data.status === 200) {
         setData(res.data.result);
@@ -32,16 +49,32 @@ const Dashboard = () => {
     });
     getNotifyction().then((res) => {
       if (res.data.status === 200) {
-        dispatch(getNotify(res.data.result));
+        // setCountData(res.data.result);
+        dispatch(AddNotify(res.data.result));
       }
     });
-    
-    // getEnquiry().then((res) => {
-    //   if (res.data.status === 200) {
-    //     setEnquiry(res.data.result)
-    //   }
-    // });
+
   }
+  useEffect(() => {
+    console.log("1");
+    fetchData();
+  }, []);
+
+  
+  // useEffect(() => {
+  //   console.log("props",props);
+  //   fetchData();
+  //   console.log("CountData "+CountData," count "+count);
+  //   if (count !== CountData ) {
+  //     getNotifyction().then((res) => {
+  //       if (res.data.status === 200) {
+  //         dispatch(AddNotify(res.data.result));
+  //       }
+  //     })
+  //   }
+  // }, [props.counts]);
+
+
 
   const showConfirm = (event, id) => {
     confirm({
@@ -94,17 +127,10 @@ const Dashboard = () => {
           <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
               <img src="images/logo.png" alt="" srcset="" style={{ width: "125px" }} />
-              {/* style="width:125px" */}
             </div>
             <div class="col-4 text-center">
 
             </div>
-            {/* <div class="col-4 d-flex justify-content-end align-items-center">
-              <a class="text-muted" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-              </a>
-              <Link to="/signup"><a class="btn btn-sm btn-outline-secondary" >Sign up</a></Link>
-            </div> */}
           </div>
 
         </div>
@@ -154,9 +180,6 @@ const Dashboard = () => {
               ]}
               data={data}
               title="Admin Dashboard "
-              // editable={{
-              //   onRowAdd: () => { history.push('/create-client') }
-              // }}
               actions={[
                 {
                   icon: 'add',
@@ -177,78 +200,275 @@ const Dashboard = () => {
               ]}
             />
           </div>
-          <div>
-            {/*<h5>Search</h5>
-          <div className='d-flex'>
-            <input class="form-control   mr-4" id="myInput" type="text" placeholder="Search.." onChange={(e) => setSearch(e.target.value)}></input>
-            
-              <button type="button" class="btn btn-success mx-2 " disabled>Export</button>
-              <Link to="/create-client">
-                <button type="button" class="btn btn-secondary px-5">Add</button>
-              </Link>
-            
-          </div>
-          <br />
-           <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Cust ID</th>
-                  <th>Name</th>
-                  <th>Mobile</th>
-                  {/* <th>Email</th> */}
-            {/* <th>Type</th>
-         <th>Product</th> 
-                  <th>Location</th>
-                  <th>Category</th>
-                  <th>Qty</th>
-                  <th>Edit/ Delete</th>
-                </tr>
-              </thead>
-              <tbody id="myTable">
-                {data.length !== 0 ?
-                  data.filter((item) => {
-                    if (search === '') {
-                      return item;
-                    } else if (item.customername.toLowerCase().includes(search.toLowerCase())) {
-                      return item;
-                    }
-                  }).map((val) => (
-                    <tr key={val.id}>
-                      <td>{val.id}</td>
-                      <td>{val.customername}</td>
-                      <td>{val.phone}</td>
-                      <td>{val.address}</td>
-                      <td>{val.category}</td>
-                      <td>{val.quantity}</td>
-
-                      {/* <td>{val.email}</td>
-                <td>{val.type}</td>
-                  <td>{val.product}</td> 
-
-
-                      <td>
-                        <Button onClick={(e) => handleEdit(e, val)}> Edit</Button>
-
-                        <Divider type="vertical" />
-                        <Button onClick={(e) => showConfirm(e, val.id)}> Delete</Button>
-                      </td>
-                    </tr>
-                  )) : <tr><p className="text-center m-100 color-blue">No data found</p></tr>
-                }
-                <tr>
-                  
-                </tr>
-              </tbody>
-            </table>
-          </div> */}
-          </div>
+          
         </div>
       </div>
-
     </>
   );
 }
 
+const mapStatetopProps=(props)=>{
+  return{
+    notify:props.notifycation.notify
+  }
+}
 
-export default Dashboard;
+export default connect(mapStatetopProps) (Dashboard);
+
+
+
+
+// ############# dashboard component ################
+
+
+
+// const { Option } = Select;
+
+// export const ClientRequest = () => {
+//   const dispatch = useDispatch();
+//   console.log();
+//  const props= useSelector(state => state.notifycation.notify)
+//   const handlesignup = (value) => {
+//     const id = sessionStorage.getItem("clientId");
+//     value.clientId = id;
+//     let val = {
+//       clientId: "1",
+//       complaint: "repair & maintenance",
+//       comment: "gfgfdgvfgvb",
+//       product: "Product",
+//       quantity: "quantity",
+//       category: "category",
+//       other: "2wdfdf"
+//     };
+//     try {
+//       createClientEnquiry(val).then((res) => {
+//         // notify();
+//         if (res.data.status === 200) {
+//           console.log(props);
+//           getNotifyction().then((res) => {
+//             if (res.data.status === 200) {
+//               console.log(res.data.result);
+//               dispatch(AddNotify(res.data.result));
+//             }
+//           });
+//           notification.success({
+//             message: res.data.message,
+//             description: 'This feature has been updated later!',
+//           });
+//           // document.getElementById('enquiryForm').reset()
+//           // history.push("/client-dashboard");
+
+//         } else {
+//           notification.warn({
+//             message: res.data.message,
+//             description: 'This feature has been updated later!',
+//           })
+//         }
+//       });
+
+//     } catch (error) {
+//       console.error(error)
+//       notification.error({
+//         message: error.message,
+//         description: 'This feature has been updated later!',
+//       })
+//     }
+//   };
+//   const categoryTypes = [
+//     "Steel & cement",
+//     "Electrical",
+//     "Sanitory|Tile|Plumbing",
+//     "paints",
+//     "Water proofing",
+//     "Playwoods|Glasses",
+//     "Kitchen Items",
+//     "Water treatment",
+//     "Mosqito slveeas",
+//     "Hardware Tools"
+//   ]
+
+//   const style = {
+//     color: '#fff',
+//     backgroundColor: '#344e89',
+//     borderRadius: '5px',
+//   }
+
+//           console.log(props);
+
+//   return (
+//     <>
+//       <div class="wrapper h-100">
+//         <div class="d-lg-flex flex-lg-row login h-100 mt-1">
+//           <div class="  logo-sec h-lg-100">
+//             <div class="d-flex flex-row login h-100">
+//               <div class=" w-100 text-center">
+//                 <Link to="/">
+//                   <img src="images/logo.png" alt="" srcset="" />
+//                 </Link>
+//               </div>
+//             </div>
+//           </div>
+//           <div class=" d-flex  tile-sec w-100 h-100     ">
+//             <div class="d-flex flex-row login h-lg-100">
+//               <div class=" w-100 mt-5 ">
+
+
+//                 <div class="card m-auto p-3 mt-5 pt-2 sign-card"  >
+//                   <div class="container-fluid mt-3">
+//                     <h3>Client Page</h3>
+//                     <Form onFinish={handlesignup} id='enquiryForm'>
+//                       <div className="row">
+
+//                         <div className="col-lg-6" >
+//                           <div className="form-group">
+//                             <label>Product Name 1</label>
+//                             <Form.Item
+//                               name="product"
+//                               // label="Product Name"
+//                               rules={[
+//                                 {
+//                                   required: true,
+//                                   message: "Please input product name!",
+//                                 },
+//                               ]}
+
+//                             >
+//                               <Input
+//                                 className="form-control"
+//                                 type="text"
+//                                 placeholder="product name"
+//                               />
+//                             </Form.Item>
+//                           </div>
+//                           <div className="form-group">
+//                             <label>Category</label>
+//                             <Form.Item
+//                               name="category"
+//                               rules={[{ required: true, message: 'Please select Category!' }]}
+//                             >
+//                               <Select mode="multiple" placeholder="select your Category">
+//                                 {/* <Option value="1">1</Option> */}
+//                                 {categoryTypes.map((item) => {
+//                                   return <Option key={item} value={item}>{item}</Option>
+//                                 })}
+//                               </Select>
+//                             </Form.Item>
+//                           </div>
+
+//                           <div className="form-group">
+//                             <label>Quantity</label>
+//                             <Form.Item
+//                               name="quantity"
+//                               // label="Quantity"
+//                               rules={[
+//                                 {
+//                                   required: true,
+//                                   message: "Please input your quantity!",
+//                                 },
+//                               ]}
+//                             >
+//                               <Input
+//                                 className="form-control"
+//                                 type="number"
+//                                 placeholder="Quantity"
+//                               />
+//                             </Form.Item>
+//                           </div>
+
+//                         </div>
+//                         <div className="col-lg-6" >
+
+//                           {/* <div className="form-group ">
+//                             <label>Support|Service|Complaint</label>
+//                             <Form.Item
+//                               name="complaint"
+//                               rules={[
+//                                 {
+//                                   required: true,
+//                                   message:
+//                                     'Please input your Complaint!',
+//                                 },
+//                               ]}>
+//                               <Select placeholder="select your type of customer">
+//                                 <Option value="repair & maintenance">repair & maintenance</Option>
+//                                 <Option value="Installation">Installation</Option>
+//                               </Select>
+//                             </Form.Item>
+//                           </div> */}
+//                           <div className="form-group">
+//                             <label>Product Name 2</label>
+//                             <Form.Item
+//                               name="product2"
+//                               // label="Product Name"
+//                               rules={[
+//                                 {
+//                                   required: false,
+//                                   message: "Please input product name!",
+//                                 },
+//                               ]}
+
+//                             >
+//                               <Input
+//                                 className="form-control"
+//                                 type="text"
+//                                 placeholder="product name"
+//                               />
+//                             </Form.Item>
+//                           </div>
+//                           <div className="form-group ">
+//                             <label>Other</label>
+//                             <Form.Item
+//                               name="other"
+//                               rules={[
+//                                 {
+//                                   required: false,
+//                                   message:
+//                                     'Please input your other!',
+//                                 },
+//                               ]}>
+//                               <Input
+//                                 className="form-control"
+//                                 type="text"
+//                                 placeholder="Other"
+//                               />
+//                             </Form.Item>
+//                           </div>
+//                           <div className="form-group">
+//                             <label>comment</label>
+//                             <Form.Item
+//                               name="comment"
+//                               // label="Comment"
+//                               rules={[
+//                                 {
+//                                   required: true,
+//                                   message: "Please input your comment!",
+//                                 },
+//                               ]}
+//                             >
+//                               <TextArea
+//                                 className="form-control "
+//                                 placeholder="Comments"
+//                                 autoSize={{ minRows: 5, }}
+//                               />
+//                             </Form.Item>
+//                           </div>
+
+//                         </div>
+//                         <div className="form-group">
+//                           <button type='submit' style={style} class="p-2 form-control" >Submit</button>
+//                         </div>
+//                       </div>
+//                     </Form>
+//                     {/* style="margin-top:30px !important" */}
+//                   </div>
+//                 </div>
+
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
