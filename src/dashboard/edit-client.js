@@ -106,7 +106,8 @@ const EditClient = () => {
     lead: data.lead,
     address: data.address,
     quantity: data.quantity,
-    comment: data.comment
+    comment: data.comment,
+    handeld:data.handeld
   })
   return (
     <>
@@ -318,6 +319,26 @@ const EditClient = () => {
                     />
                   </Form.Item>
                 </div>
+                <div className="form-group">
+                    <Form.Item
+                      {...formItemLayout}
+                      name="handeld"
+                      label="Handled"
+                      rules={[
+                        {
+                          required: false,
+                          message: "Please input Handled!",
+                        },
+                      ]}
+
+                    >
+                      <Input
+                        className="form-control"
+                        type="text"
+                        placeholder="Handled"
+                      />
+                    </Form.Item>
+                  </div>
               </div>
               <div class="col-sm">
                 <div className="form-group">

@@ -140,7 +140,7 @@ class AddClient extends React.Component {
                       label="Email Address"
                       rules={[
                         {
-                          // required: false,
+                          required: true,
                           message: "Please input your email!",
                         },
                       ]}
@@ -159,7 +159,7 @@ class AddClient extends React.Component {
                       label="customer Name"
                       rules={[
                         {
-                          required: false,
+                          required: true,
                           message: "Please input your username!",
                         },
                       ]}
@@ -179,7 +179,7 @@ class AddClient extends React.Component {
                       label="customer Type "
                       rules={[
                         {
-                          required: false,
+                          required: true,
                           message: "Please input type of client!",
                         },
                       ]}
@@ -200,7 +200,7 @@ class AddClient extends React.Component {
                       {...formItemLayout}
                       name="category"
                       label="Category"
-                      rules={[{ required: false, message: 'Please select Category!' }]}
+                      rules={[{ required: true, message: 'Please select Category!' }]}
                     >
                       <Select mode="multiple" placeholder="select your Category">
                         {/* <Option value="1">1</Option> */}
@@ -217,7 +217,7 @@ class AddClient extends React.Component {
                       label="Product Name"
                       rules={[
                         {
-                          required: false,
+                          required: true,
                           message: "Please input product name!",
                         },
                       ]}
@@ -250,6 +250,26 @@ class AddClient extends React.Component {
                       />
                     </Form.Item>
                   </div>
+                  <div className="form-group">
+                    <Form.Item
+                      {...formItemLayout}
+                      name="handeld"
+                      label="Handled"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input Handled!",
+                        },
+                      ]}
+
+                    >
+                      <Input
+                        className="form-control"
+                        type="text"
+                        placeholder="Handled"
+                      />
+                    </Form.Item>
+                  </div>
                 </div>
                 <div class="col-sm">
                   <div className="form-group">
@@ -259,7 +279,7 @@ class AddClient extends React.Component {
                       label="Mobile Number"
                       rules={[
                         {
-                          required: false,
+                          required: true,
                           message: "Please input your mobile number!",
                         },
                       ]}
@@ -281,7 +301,7 @@ class AddClient extends React.Component {
                       label="Source of Lead"
                       rules={[
                         {
-                          required: false,
+                          required: true,
                           message: "Please input your source of Lead!",
                         },
                       ]}
@@ -338,7 +358,7 @@ class AddClient extends React.Component {
                         label="Comment"
                         rules={[
                           {
-                            required: false,
+                            required: true,
                             message: "Please input your comment!",
                           },
                         ]}

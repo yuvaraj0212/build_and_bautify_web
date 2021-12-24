@@ -176,7 +176,7 @@ function Dashboard(props) {
                 { title: "Category", field: "category" },
                 { title: "Qty", field: "quantity" },
                 { title: "Description", field: "comment", },
-                { title: "Handled", field: 'customername' },
+                { title: "Handled", field: 'handeld' },
               ]}
               data={data}
               title="Admin Dashboard "

@@ -8,6 +8,7 @@ import { getDelNotifyction, getEnquiry } from "../url_helper";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import { useDispatch } from "react-redux";
 import { delNotify } from "../redux/action/action";
+import moment from "moment";
 const { confirm } = Modal;
 const Enquiry = () => {
     const history = new useHistory();
@@ -96,7 +97,9 @@ const Enquiry = () => {
                                 { title: "Email", field: "userModel.email", },
                                 { title: "Category", field: "category" },
                                 { title: "Qty", field: "quantity" },
-                                // { title: "Complaint", field: "complaint" },
+                                { title: "createDate", field: "createDate" ,
+                                render: rowData => moment(rowData.createDate).format("DD/MM/YYYY hh:mm A")
+                            },
                             ]}
                             data={enquiry}
                             title="Enquiry "

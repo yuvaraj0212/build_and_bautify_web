@@ -33,7 +33,7 @@ const ClientRequest = () => {
             message: res.data.message,
             description: 'This feature has been updated later!',
           });
-          // document.getElementById('enquiryForm').reset()
+          document.getElementById('enquiryForm').reset()
           // history.push("/client-dashboard");
 
         } else {
