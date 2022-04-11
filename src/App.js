@@ -16,7 +16,7 @@ import ClientSrevice from './client/clientService';
 import { useDispatch, useSelector } from "react-redux";
 import resetPassword from './main-screen/resetPassword';
 import history from './history';
-
+import Demo from './Demo';
 function App() {
   const count = useSelector(state => state.notifycation.notify);
   return (
@@ -39,6 +39,7 @@ function App() {
           <Route path={"/enquiry"} component={Enquiry} />
           <Route exact path="/client-request" component={ClientRequest} />
           <Route exact path="/client-service" component={ClientSrevice} />
+          <Route exact path="/demo" component={Demo} />
         </Switch>
       </BrowserRouter>
 

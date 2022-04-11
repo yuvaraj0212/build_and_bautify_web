@@ -306,7 +306,7 @@ const EditClient = () => {
                     label="Others"
                     rules={[
                       {
-                        required: true,
+                        required: false,
                         message: "Please input your brand!",
                       },
                     ]}
@@ -326,7 +326,7 @@ const EditClient = () => {
                       label="Handled"
                       rules={[
                         {
-                          required: false,
+                          required: true,
                           message: "Please input Handled!",
                         },
                       ]}
