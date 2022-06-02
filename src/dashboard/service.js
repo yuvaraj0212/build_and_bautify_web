@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "../main-screen/style.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Badge, Modal } from "antd";
 import MaterialTable from "material-table";
 import "antd/dist/antd.css";
-import { getDelNotifyction, getEnquiry } from "../url_helper";
+import { getDelNotifyction, getService } from "../url_helper";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useDispatch } from "react-redux";
 import { delNotify } from "../redux/action/action";
 import moment from "moment";
-const { confirm } = Modal;
-const Enquiry = () => {
-  const history = new useHistory();
-  // const [data, setData] = useState(NaN || '');
-  const [enquiry, setEnquiry] = useState([]);
+// const { confirm } = Modal;
+
+const Service = () => {
+  const [service, setService] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchData();
@@ -24,9 +23,9 @@ const Enquiry = () => {
         dispatch(delNotify(res.data.result));
       }
     });
-    getEnquiry().then((res) => {
+    getService().then((res) => {
       if (res.data.status === 200) {
-        setEnquiry(res.data.result);
+        setService(res.data.result);
       }
     });
   };
@@ -39,7 +38,7 @@ const Enquiry = () => {
             <div class="col-4 pt-1">
               <img
                 src="images/logo.png"
-                alt="logo"
+                alt=""
                 srcset=""
                 style={{ width: "125px" }}
               />
@@ -73,7 +72,7 @@ const Enquiry = () => {
           <Breadcrumb.Item>
             <Link to="/dashboard">Home</Link>
           </Breadcrumb.Item>
-          <Breadcrumb.Item active>Notification</Breadcrumb.Item>
+          <Breadcrumb.Item active>Service</Breadcrumb.Item>
         </Breadcrumb>
         <div class="container-fluid mt-3">
           {/* <Link to="create-client"><a class="btn btn-primary float-right mb-2" >add</a></Link> */}
@@ -90,16 +89,32 @@ const Enquiry = () => {
                 // ..other options
                 exportButton: {
                   csv: true,
-                  pdf: true,
                 },
               }}
               columns={[
-                { title: "Enquiry ID", field: "id" },
-                { title: "Client Name", field: "userModel.name" },
+                { title: "Service ID", field: "id" },
+                {
+                  title: "Bill",
+                  field: "imageURL",
+                  render: (item) => (
+                    // const logo =
+                    // require(`../assets/images/${item.filename}`).default;
+                    <a href={item.imageURL} target="_blank" download>
+                      <img
+                        src={item.imageURL}
+                        alt={item.filename}
+                        border="3"
+                        height="100"
+                        width="100"
+                      />
+                    </a>
+                  ),
+                },
+                { title: "Customer Name", field: "userModel.name" },
                 { title: "Mobile", field: "userModel.phone" },
-                { title: "Email", field: "userModel.email" },
-                { title: "Category", field: "category" },
-                { title: "Qty", field: "quantity" },
+                // { title: "Email", field: "userModel.email" },
+                { title: "Product", field: "productName" },
+                { title: "Bill No", field: "billno" },
                 {
                   title: "createDate",
                   field: "createDate",
@@ -107,53 +122,9 @@ const Enquiry = () => {
                     moment(rowData.createDate).format("DD/MM/YYYY hh:mm A"),
                 },
               ]}
-              data={enquiry}
-              title="Enquiry "
+              data={service}
+              title="Service "
             />
-          </div>
-          <div>
-            {/* <div class="table-responsive ">
-                        <table class="table table-bordered ">
-                            <thead>
-                                <tr>
-                                    <th>Enquiry ID</th>
-                                    <th>Client Name</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
-                                    <th>Category</th>
-                                    <th>Qty</th>
-                                    <th>Complaint</th>
-                                    {/* <th>Edit/ Delete</th> 
-                                </tr>
-                            </thead>
-                            <tbody id="myTable">
-                                {enquiry.length !== 0 ?
-                                    enquiry.filter((item) => {
-                                        if (search === '') {
-                                            return item;
-                                        } else if (item.userModel.name.toLowerCase().includes(search.toLowerCase())) {
-                                            return item;
-                                        } else if (item.userModel.phone.includes(search)) {
-                                            return item;
-                                        }
-                                    }).map((val, index) => (
-                                        <tr key={val.id}>
-                                            <td>{val.id}</td>
-                                            <td>{val.userModel.name}</td>
-                                            <td>{val.userModel.phone}</td>
-                                            <td>{val.userModel.email}</td>
-                                            <td>{val.category}</td>
-                                            <td>{val.quantity}</td>
-                                            <td>{val.complaint}</td>
-
-                                        </tr>
-                                    )) : <tr><p className="text-center m-100 color-blue">No data found</p></tr>
-                                }
-                                <tr>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>*/}
           </div>
         </div>
       </div>
@@ -161,4 +132,4 @@ const Enquiry = () => {
   );
 };
 
-export default Enquiry;
+export default Service;

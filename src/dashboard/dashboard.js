@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import '../main-screen/style.css';
-import { Link, useHistory } from 'react-router-dom';
-import {Modal, Select, Form, Input, Button, notification } from 'antd';
-import {
-  ExclamationCircleOutlined, BellOutlined
-} from '@ant-design/icons';
+import "../main-screen/style.css";
+import { Link, useHistory } from "react-router-dom";
+import { Modal, Select, Form, Input, Button, notification, Badge } from "antd";
+import { ExclamationCircleOutlined, BellOutlined } from "@ant-design/icons";
 import MaterialTable from "material-table";
-import 'antd/dist/antd.css';
-import { deleteClient, getClient, getEnquiry, getNotifyction } from "../url_helper";
-import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import "antd/dist/antd.css";
+import {
+  deleteClient,
+  getClient,
+  getEnquiry,
+  getNotifyction,
+} from "../url_helper";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { AddNotify, getNotify, pushNotify } from "../redux/action/action";
 
-
-import 'antd/dist/antd.css';
-import { createClientEnquiry, } from "../url_helper";
+import "antd/dist/antd.css";
+import { createClientEnquiry } from "../url_helper";
 import TextArea from "rc-textarea";
 
 const { confirm } = Modal;
@@ -24,24 +26,11 @@ function Dashboard(props) {
   const [CountData, setCountData] = useState(0);
   const [data, setData] = useState([]);
   // const count = useSelector(state => state.notifycation.notify);
-  const count = props.notify
+  const count = props.notify;
   const dispatch = useDispatch();
 
-  console.log("count",props);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setCountData(CountData + 1);
-  //     getNotifyction().then((res) => {
-  //       if (res.data.status === 200) {
-  //         dispatch(AddNotify(res.data.result));
-  //       }
-  //     }); 
-  //   }, 10000);
-
-  // });
   const fetchData = () => {
-
-    console.log("props",props);
+    console.log("props", props);
     getClient().then((res) => {
       if (res.data.status === 200) {
         setData(res.data.result);
@@ -49,45 +38,26 @@ function Dashboard(props) {
     });
     getNotifyction().then((res) => {
       if (res.data.status === 200) {
-        // setCountData(res.data.result);
         dispatch(AddNotify(res.data.result));
       }
     });
-
-  }
+  };
   useEffect(() => {
     console.log("1");
     fetchData();
   }, []);
 
-  
-  // useEffect(() => {
-  //   console.log("props",props);
-  //   fetchData();
-  //   console.log("CountData "+CountData," count "+count);
-  //   if (count !== CountData ) {
-  //     getNotifyction().then((res) => {
-  //       if (res.data.status === 200) {
-  //         dispatch(AddNotify(res.data.result));
-  //       }
-  //     })
-  //   }
-  // }, [props.counts]);
-
-
-
   const showConfirm = (event, id) => {
     confirm({
-      title: 'Do you Want to delete these items?',
+      title: "Do you Want to delete these items?",
       icon: <ExclamationCircleOutlined />,
-      content: 'Some descriptions',
+      content: "Some descriptions",
       onOk() {
-        handleDelete(id)
+        handleDelete(id);
       },
-      onCancel() {
-      },
+      onCancel() {},
     });
-  }
+  };
 
   const handleDelete = (id) => {
     const data = { clientId: id };
@@ -96,19 +66,17 @@ function Dashboard(props) {
       if (res.data.status === 200) {
         notification.success({
           message: res.data.message,
-          description: 'This feature has been updated later!',
+          description: "This feature has been updated later!",
         });
         fetchData();
       } else {
         notification.error({
           message: "hvku",
-          description: 'This feature has been updated later!',
+          description: "This feature has been updated later!",
         });
       }
-    })
-
-
-  }
+    });
+  };
 
   const handleEdit = (event, val) => {
     sessionStorage.setItem("edite", JSON.stringify(val));
@@ -116,44 +84,60 @@ function Dashboard(props) {
     // window.location.href = `/edit-client/${val.id}`
   };
 
-
-
-
-
   return (
     <>
       <div class="wrapper h-100">
         <div class="container-fluid">
           <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-              <img src="images/logo.png" alt="" srcset="" style={{ width: "125px" }} />
+              <img
+                src="images/logo.png"
+                alt=""
+                srcset=""
+                style={{ width: "125px" }}
+              />
             </div>
-            <div class="col-4 text-center">
-
-            </div>
+            <div class="col-4 text-center"></div>
           </div>
-
         </div>
-
-
 
         <div class="nav-scroller py-1 mb-2">
-          <nav class="nav px-3 d-flex justify-content-end text-white bg-dark">
-            <Link to="/enquiry" class="icon p-2">
+          <nav class="nav px-3 d-flex justify-content-end text-white bg-black">
+            {/* <Link to="/enquiry" class="icon p-2">
               <div class="txt">
-                <svg xmlns="http://www.w3.org/2000/svg" width="23" fill="currentColor" class=" bi bi-bell " viewBox="0 0 16 16">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="23"
+                  fill="currentColor"
+                  class=" bi bi-bell "
+                  viewBox="0 0 16 16"
+                >
                   <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-                </svg></div>
-              {count > 0 ? <div class="txt1">{count} </div> : ''}
+                </svg>
+              </div>
+              {count > 0 ? <div class="txt1">{count} </div> : ""}
+            </Link> */}
+            <Link to="/enquiry" class="p-2 ">
+              <Badge count={count}>
+                <a class="p-1 ">Request</a>
+              </Badge>
             </Link>
-            <a class="p-2 ">Reward</a>
+            <Link to="/service" class="p-2 ">
+              <Badge count={0}>
+                <a class="p-1 ">Service</a>
+              </Badge>
+            </Link>
+            <div class="p-2 ">
+              <Badge count={0}>
+                <a class="p-1 ">Reward</a>
+              </Badge>
+            </div>
           </nav>
         </div>
-        <Breadcrumb class="mx-2 ">
-          <Breadcrumb.Item >
-            <Link to="/">
-              Login
-            </Link>
+
+        <Breadcrumb class="mx-5 bg-transparent">
+          <Breadcrumb.Item>
+            <Link to="/">Login</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item active>Home</Breadcrumb.Item>
         </Breadcrumb>
@@ -165,62 +149,56 @@ function Dashboard(props) {
                 // ..other options
                 exportButton: {
                   csv: true,
-                  pdf: true
+                  // pdf: true,
                 },
-                actionsColumnIndex: -1
+                actionsColumnIndex: -1,
               }}
               columns={[
                 { title: "Cust ID", field: "id" },
                 { title: "Name", field: "customername" },
-                { title: "Mobile", field: "phone", },
+                { title: "Mobile", field: "phone" },
                 { title: "Category", field: "category" },
                 { title: "Qty", field: "quantity" },
-                { title: "Description", field: "comment", },
-                { title: "Handled", field: 'handeld' },
+                { title: "Description", field: "comment" },
+                { title: "Handled", field: "handeld" },
               ]}
               data={data}
               title="Admin Dashboard "
               actions={[
                 {
-                  icon: 'add',
-                  tooltip: 'Add User',
+                  icon: "add",
+                  tooltip: "Add User",
                   isFreeAction: true,
-                  onClick: (event) => history.push('/create-client')
+                  onClick: (event) => history.push("/create-client"),
                 },
                 {
-                  icon: 'delete',
-                  tooltip: 'Delete User',
-                  onClick: (event, rowData) => showConfirm(event, rowData.id)
+                  icon: "delete",
+                  tooltip: "Delete User",
+                  onClick: (event, rowData) => showConfirm(event, rowData.id),
                 },
                 {
-                  icon: 'edite',
-                  tooltip: 'edite User',
-                  onClick: (e, val) => handleEdit(e, val)
-                }
+                  icon: "edite",
+                  tooltip: "edite User",
+                  onClick: (e, val) => handleEdit(e, val),
+                },
               ]}
             />
           </div>
-          
         </div>
       </div>
     </>
   );
 }
 
-const mapStatetopProps=(props)=>{
-  return{
-    notify:props.notifycation.notify
-  }
-}
+const mapStatetopProps = (props) => {
+  return {
+    notify: props.notifycation.notify,
+  };
+};
 
-export default connect(mapStatetopProps) (Dashboard);
-
-
-
+export default connect(mapStatetopProps)(Dashboard);
 
 // ############# dashboard component ################
-
-
 
 // const { Option } = Select;
 
@@ -311,7 +289,6 @@ export default connect(mapStatetopProps) (Dashboard);
 //           <div class=" d-flex  tile-sec w-100 h-100     ">
 //             <div class="d-flex flex-row login h-lg-100">
 //               <div class=" w-100 mt-5 ">
-
 
 //                 <div class="card m-auto p-3 mt-5 pt-2 sign-card"  >
 //                   <div class="container-fluid mt-3">
@@ -471,4 +448,3 @@ export default connect(mapStatetopProps) (Dashboard);
 //     </>
 //   );
 // }
-

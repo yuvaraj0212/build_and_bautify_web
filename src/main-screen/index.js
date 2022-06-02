@@ -1,7 +1,7 @@
 import React from "react";
-import './style.css';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./style.css";
+import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 class LandingScreen extends React.Component {
   render() {
     return (
@@ -23,15 +23,11 @@ class LandingScreen extends React.Component {
                   <div class="card m-auto p-3 pt-5 card-tag">
                     <div class="card-body">
                       <Link to="/login">
-                        <a class="btn btn-primary">
-                          Login as Admin
-                        </a>
+                        <p class="btn btn-primary">Login as Admin</p>
                       </Link>
                       <br />
-                      <Link to="/client-login">
-                        <a class="btn btn-primary mt-5">
-                          Login as Client
-                        </a>
+                      <Link to="/login">
+                        <p class="btn btn-primary mt-5">Login as Customer</p>
                       </Link>
                     </div>
                   </div>
