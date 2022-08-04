@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from "react";
 import "../main-screen/style.css";
-import { Link } from "react-router-dom";
-import { Badge, Modal } from "antd";
+import { Link, useHistory } from "react-router-dom";
+import { Badge, Form, Input, Modal } from "antd";
 import MaterialTable from "material-table";
 import "antd/dist/antd.css";
-import { getDelNotifyction, getService } from "../url_helper";
+import {
+  getDelNotifyction,
+  getDelServiceNotifyction,
+  getService,
+  updateClientService,
+} from "../url_helper";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useDispatch } from "react-redux";
-import { delNotify } from "../redux/action/action";
+import { delNotify, delServiceNotify } from "../redux/action/action";
+
+import { ExclamationCircleOutlined, BellOutlined } from "@ant-design/icons";
 import moment from "moment";
-// const { confirm } = Modal;
+const { confirm } = Modal;
 
 const Service = () => {
+  const [form] = Form.useForm();
+  const [iD, setID] = useState();
+  const [visible, setVisible] = useState(false);
   const [service, setService] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = () => {
-    getDelNotifyction().then((res) => {
+    getDelServiceNotifyction().then((res) => {
       if (res.data.status === 200) {
-        dispatch(delNotify(res.data.result));
+        dispatch(delServiceNotify(res.data.result));
       }
     });
     getService().then((res) => {
@@ -29,9 +39,64 @@ const Service = () => {
       }
     });
   };
+  const handleEdit = (val) => {
+    console.log(val);
 
+    var bodyFormData = new FormData();
+    bodyFormData.append("id", iD);
+    bodyFormData.append("desc", val.desc);
+    bodyFormData.append("status", 1);
+    updateClientService(bodyFormData);
+    handleCancel();
+    fetchData();
+  };
+  const showConfirm = (event, val) => {
+    console.log(val);
+    showModal();
+    setID(val.id);
+    // confirm({
+    //   title: "Do you Want to delete these items?",
+    //   // icon: <ExclamationCircleOutlined />,
+    //   content: "Some descriptions",
+
+    //   onOk() {
+    //     handleEdit(val);
+    //   },
+    //   onCancel() {},
+    // });
+  };
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+    form.resetFields();
+  };
   return (
     <>
+      <Modal
+        visible={visible}
+        onOk={form.submit}
+        onCancel={handleCancel}
+        title="Add Your Comments "
+      >
+        <Form form={form} onFinish={handleEdit}>
+          {/* <Form.Item name="status">
+            <Input hidden value={1} />
+          </Form.Item> */}
+          <label> Type your comment :</label>
+          <Form.Item
+            name="desc"
+            // label="Type your comment"
+            rules={[
+              { required: true, message: "Please input your Description!" },
+            ]}
+          >
+            <Input.TextArea allowClear />
+          </Form.Item>
+        </Form>
+      </Modal>
       <div class="container-fluid  wrapper h-100">
         <div class="container-fluid">
           <div class="row flex-nowrap justify-content-between align-items-center">
@@ -90,6 +155,7 @@ const Service = () => {
                 exportButton: {
                   csv: true,
                 },
+                actionsColumnIndex: -1,
               }}
               columns={[
                 { title: "Service ID", field: "id" },
@@ -116,6 +182,31 @@ const Service = () => {
                 { title: "Product", field: "productName" },
                 { title: "Bill No", field: "billno" },
                 {
+                  title: "Status",
+                  field: "status",
+                  render: (rowData) => {
+                    switch (rowData.status) {
+                      case 0:
+                        return (
+                          <button type="button" class="btn btn-success">
+                            New
+                          </button>
+                        );
+                        break;
+                      default:
+                        return (
+                          <button type="button" class="btn btn-light">
+                            Visited
+                          </button>
+                        );
+
+                        break;
+                    }
+                  },
+                },
+
+                { title: "Description", field: "desc" },
+                {
                   title: "createDate",
                   field: "createDate",
                   render: (rowData) =>
@@ -124,6 +215,24 @@ const Service = () => {
               ]}
               data={service}
               title="Service "
+              actions={[
+                // {
+                //   icon: "add",
+                //   tooltip: "Add User",
+                //   isFreeAction: true,
+                //   onClick: (event) => useHistory.push("/create-client"),
+                // },
+                // {
+                //   icon: "delete",
+                //   tooltip: "Delete User",
+                //   // onClick: (event, rowData) => showConfirm(event, rowData.id),
+                // },
+                {
+                  icon: "edite",
+                  tooltip: "edite User",
+                  onClick: (e, val) => showConfirm(e, val),
+                },
+              ]}
             />
           </div>
         </div>

@@ -10,10 +10,16 @@ import {
   getClient,
   getEnquiry,
   getNotifyction,
+  getServiceNotifyction,
 } from "../url_helper";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { AddNotify, getNotify, pushNotify } from "../redux/action/action";
+import {
+  AddNotify,
+  AddServiceNotify,
+  getNotify,
+  pushNotify,
+} from "../redux/action/action";
 
 import "antd/dist/antd.css";
 import { createClientEnquiry } from "../url_helper";
@@ -27,10 +33,10 @@ function Dashboard(props) {
   const [data, setData] = useState([]);
   // const count = useSelector(state => state.notifycation.notify);
   const count = props.notify;
+  const serviceNotify = props.serviceNotify;
   const dispatch = useDispatch();
 
   const fetchData = () => {
-    console.log("props", props);
     getClient().then((res) => {
       if (res.data.status === 200) {
         setData(res.data.result);
@@ -41,9 +47,13 @@ function Dashboard(props) {
         dispatch(AddNotify(res.data.result));
       }
     });
+    getServiceNotifyction().then((res) => {
+      if (res.data.status === 200) {
+        dispatch(AddServiceNotify(res.data.result));
+      }
+    });
   };
   useEffect(() => {
-    console.log("1");
     fetchData();
   }, []);
 
@@ -83,7 +93,6 @@ function Dashboard(props) {
     history.push(`/edit-client/${val.id}`);
     // window.location.href = `/edit-client/${val.id}`
   };
-
   return (
     <>
       <div class="wrapper h-100">
@@ -123,7 +132,7 @@ function Dashboard(props) {
               </Badge>
             </Link>
             <Link to="/service" class="p-2 ">
-              <Badge count={0}>
+              <Badge count={serviceNotify}>
                 <a class="p-1 ">Service</a>
               </Badge>
             </Link>
@@ -158,6 +167,7 @@ function Dashboard(props) {
                 { title: "Name", field: "customername" },
                 { title: "Mobile", field: "phone" },
                 { title: "Category", field: "category" },
+                { title: "Product", field: "product" },
                 { title: "Qty", field: "quantity" },
                 { title: "Description", field: "comment" },
                 { title: "Handled", field: "handeld" },
@@ -193,6 +203,7 @@ function Dashboard(props) {
 const mapStatetopProps = (props) => {
   return {
     notify: props.notifycation.notify,
+    serviceNotify: props.notifycation.serviceNotify,
   };
 };
 

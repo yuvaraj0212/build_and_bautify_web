@@ -85,6 +85,35 @@ const ClientSrevice = () => {
                 <Link to="/">
                   <img src="images/logo.png" alt="" srcset="" />
                 </Link>
+                <ul class="">
+                  <li class="border-right">
+                    <a href="tel:9003229922">
+                      <span class="">
+                        <i aria-hidden="true" class="fa fa-phone"></i>{" "}
+                      </span>
+                      <span class=""> Phone</span>
+                    </a>
+                  </li>
+                  <li class="border-right">
+                    <a href="mailto:buildnbeautify@gmail.com">
+                      <span class="">
+                        <i aria-hidden="true" class="fa fa-envelope "></i>{" "}
+                      </span>
+                      <span class=""> Email</span>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a
+                      href="https://g.page/srinivasakaenterprises?share"
+                      target="_blank"
+                    >
+                      <span class="">
+                        <i aria-hidden="true" class="fa fa-map-marker"></i>{" "}
+                      </span>
+                      <span class=""> Location</span>
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -172,7 +201,7 @@ const ClientSrevice = () => {
                             >
                               <Input
                                 className="form-control"
-                                type="number"
+                                type="text"
                                 placeholder="Quantity"
                               />
                             </Form.Item>

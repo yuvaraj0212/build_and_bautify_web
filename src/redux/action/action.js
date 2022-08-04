@@ -7,13 +7,7 @@ export const AddNotify = (notify) => {
     payload: notify,
   };
 };
-// export const loadNotify=()=>{
-//     return (dispatch)=>{
-//         return  Axios({  method: 'get',url: `http://localhost:8080/notify`}).then(res=>{
-//             dispatch(AddNotify(res.data.result))
-//         })
-//     }
-// }
+
 export const getNotify = () => {
   return {
     type: ActionTypes.GET_NOTIFY,
@@ -22,6 +16,25 @@ export const getNotify = () => {
 export const delNotify = (notify) => {
   return {
     type: ActionTypes.DEL_NOTIFY,
+    payload: notify,
+  };
+};
+
+export const AddServiceNotify = (notify) => {
+  return {
+    type: ActionTypes.ADD_SERVICE_NOTIFY,
+    payload: notify,
+  };
+};
+
+export const getServiceNotify = () => {
+  return {
+    type: ActionTypes.GET_SERVICE_NOTIFY,
+  };
+};
+export const delServiceNotify = (notify) => {
+  return {
+    type: ActionTypes.DEL_SERVICE_NOTIFY,
     payload: notify,
   };
 };

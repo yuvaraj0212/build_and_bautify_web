@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const baseUrl = "http://43.204.214.242:8080/bab";
+const baseUrl = "http://13.235.75.217:8080/bab";
 // const baseUrl = "http://localhost:8080";
 
 export const signin = (data) =>
@@ -27,6 +27,13 @@ export const createClientService = (data) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
+export const updateClientService = (data) =>
+  Axios({
+    method: "post",
+    url: `${baseUrl}/update-client-service`,
+    data: data,
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 export const updateClient = (data) =>
   Axios({ method: "post", url: `${baseUrl}/update-client`, data });
 
@@ -47,3 +54,9 @@ export const getNotifyction = () =>
 
 export const getDelNotifyction = () =>
   Axios({ method: "get", url: `${baseUrl}/delnotify` });
+
+export const getServiceNotifyction = () =>
+  Axios({ method: "get", url: `${baseUrl}/getServicenotify` });
+
+export const getDelServiceNotifyction = () =>
+  Axios({ method: "get", url: `${baseUrl}/delSerivcenotify` });

@@ -1,7 +1,7 @@
 import React from "react";
-import '../main-screen/style.css';
-import { Link } from 'react-router-dom';
-import 'antd/dist/antd.css';
+import "../main-screen/style.css";
+import { Link } from "react-router-dom";
+import "antd/dist/antd.css";
 
 const ClientDashboard = () => {
   // const history = useHistory();
@@ -55,7 +55,6 @@ const ClientDashboard = () => {
   //   borderRadius: '5px',
   // }
 
-
   return (
     <>
       <div class="wrapper h-100">
@@ -66,30 +65,57 @@ const ClientDashboard = () => {
                 <Link to="/">
                   <img src="images/logo.png" alt="" srcset="" />
                 </Link>
+                <ul class="">
+                  <li class="border-right">
+                    <a href="tel:9003229922">
+                      <span class="">
+                        <i aria-hidden="true" class="fa fa-phone"></i>{" "}
+                      </span>
+                      <span class=""> Phone</span>
+                    </a>
+                  </li>
+                  <li class="border-right">
+                    <a href="mailto:buildnbeautify@gmail.com">
+                      <span class="">
+                        <i aria-hidden="true" class="fa fa-envelope "></i>{" "}
+                      </span>
+                      <span class=""> Email</span>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a
+                      href="https://g.page/srinivasakaenterprises?share"
+                      target="_blank"
+                    >
+                      <span class="">
+                        <i aria-hidden="true" class="fa fa-map-marker"></i>{" "}
+                      </span>
+                      <span class=""> Location</span>
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
           <div class=" d-flex  tile-sec w-100 ">
-              <div class="d-flex flex-row login h-100">
-                <div class=" w-100 text-center">
-                  <div class="card m-auto p-3 pt-5 card-tag">
-                    <div class="card-body">
-                      <Link to="client-request">
-                        <a class="btn btn-primary">
-                          Product Request
-                        </a>
-                      </Link>
-                      <br />
-                      <Link to="/client-service">
-                        <a class="btn btn-primary mt-5">
+            <div class="d-flex flex-row login h-100">
+              <div class=" w-100 text-center">
+                <div class="card m-auto p-3 pt-5 card-tag">
+                  <div class="card-body">
+                    <Link to="client-request">
+                      <a class="btn btn-primary">Product Request</a>
+                    </Link>
+                    <br />
+                    <Link to="/client-service">
+                      <a class="btn btn-primary mt-5">
                         Support | Service | Complaint
-                        </a>
-                      </Link>
-                    </div>
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           {/* <div class=" d-flex  tile-sec w-100 h-100">
             <div class="d-flex flex-row login h-lg-100">
               <div class=" w-100 mt-5 ">
@@ -248,7 +274,6 @@ const ClientDashboard = () => {
       </div>
     </>
   );
-}
-
+};
 
 export default ClientDashboard;

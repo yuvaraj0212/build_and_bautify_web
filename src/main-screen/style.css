@@ -1,50 +1,50 @@
-.wrapper{
-    position: absolute;
-    width:100%!important;
+.wrapper {
+  position: absolute;
+  width: 100% !important;
 }
-.login{
-    align-items: center;
-    position: relative !important;
-    height: 100%!important;
-    width: 100% !important;
+.login {
+  align-items: center;
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 
-.logo-sec{
-    width:60%!important;
-    background-color: white!important;
+.logo-sec {
+  width: 60% !important;
+  background-color: white !important;
 }
 
 .btn-primary {
-    width:283px;
-    color: #fff !important;
-    background-color: #344e89!important;
-    border-radius: 5px!important;
-    /* border-color: #007bff; */
+  width: 283px;
+  color: #fff !important;
+  background-color: #344e89 !important;
+  border-radius: 5px !important;
+  /* border-color: #007bff; */
 }
 
-.nav a{
-    color:whitesmoke !important;
+.nav a {
+  color: whitesmoke !important;
 }
-.dropdown-menu{
-    right: 121px !important;
-    color: red !important;
+.dropdown-menu {
+  right: 121px !important;
+  color: red !important;
 }
-.tile-sec{
-    background: #f3f3f3;
-    height: 100%!important;
+.tile-sec {
+  background: #f3f3f3;
+  height: 100% !important;
 }
-.card-tag{
-    border:none;
-     height:270px;
-      width:357px;
+.card-tag {
+  border: none;
+  height: 270px;
+  width: 357px;
 }
-.sign-card{
-    border: none;
-    width: 70% !important;
+.sign-card {
+  border: none;
+  width: 70% !important;
 }
-.sign-cards{
-    border: none;
-    width: 50% !important;
+.sign-cards {
+  border: none;
+  width: 50% !important;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -52,53 +52,63 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+ul {
+  list-style-type: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 0 0 0 -16px;
+}
+li {
+  padding: 0 3px;
+}
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 .icon {
-    /* width:30px; 
+  /* width:30px; 
     height:30px; */
-    position: relative;
+  position: relative;
 }
-.txt1{
-    font-size: x-small;
-    position: absolute;
-    padding: 4px;
-    top: -4px;
-    right: 2px;
-    border-radius: 25px;
-    color: #eaffc5;
-    background-color: #2abf77;
+.txt1 {
+  font-size: x-small;
+  position: absolute;
+  padding: 4px;
+  top: -4px;
+  right: 2px;
+  border-radius: 25px;
+  color: #eaffc5;
+  background-color: #2abf77;
 }
-.txt{
-    /* background: rgb(47, 219, 12); */
-    /* font-size: xx-small; */
-    /* position: absolute; */
-    padding: 2px;
-    /* top: -7px;
+.txt {
+  /* background: rgb(47, 219, 12); */
+  /* font-size: xx-small; */
+  /* position: absolute; */
+  padding: 2px;
+  /* top: -7px;
     right: -13px; */
-    border-radius: 25px;
+  border-radius: 25px;
 }
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    .login{
-        align-items: center;
-        position: relative !important;
-        /* height: 70%!important; */
-        width: 100% !important;
-    }
-    .tile-sec{
-        background: #f3f3f3;
-        height: 75%!important;
-    }
-    .sign-card{
-        border: none;
-        width: 80% !important;
-    }
-    .sign-cards{
-        border: none;
-        width: 80% !important;
-    }
+  /* For mobile phones: */
+  .login {
+    align-items: center;
+    position: relative !important;
+    /* height: 70%!important; */
+    width: 100% !important;
   }
+  .tile-sec {
+    background: #f3f3f3;
+    height: 75% !important;
+  }
+  .sign-card {
+    border: none;
+    width: 80% !important;
+  }
+  .sign-cards {
+    border: none;
+    width: 80% !important;
+  }
+}
